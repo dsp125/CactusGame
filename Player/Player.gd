@@ -3,10 +3,10 @@ extends KinematicBody2D
 const ACCEL = 400
 const MAX_SPD = 60
 const ROLL_SPEED = 75
-const FRICTION = 1000
+const FRICTION = 500
 
 var velocity = Vector2.ZERO
-var roll_vector = Vector2.ZERO
+var roll_vector = Vector2.DOWN
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
@@ -43,7 +43,7 @@ func move_state(delta):
 		animationTree.set("parameters/Walk/blend_position", input_vector)
 		animationTree.set("parameters/Roll/blend_position", input_vector)
 		animationState.travel("Walk")
-		velocity = velocity.move_toward(input_vector * MAX_SPD, ACCEL * delta)
+		velocity = velocity.move_toward(input_vector * MAX_SPD, ACCEL * FRICTION * delta)
 		
 	else:
 		animationState.travel("Idle")
@@ -52,11 +52,11 @@ func move_state(delta):
 	move()
 	
 	if Input.is_action_just_pressed("ui_roll"):
-		animationTree.set("parameters/Roll/blend_position", input_vector)
+		animationTree.set("parameters/Roll/blend_position", roll_vector)
 		state = PlayerStates.ROLL
 		
 
-func roll_state(delta):
+func roll_state(_delta):
 	velocity = roll_vector * ROLL_SPEED
 	animationState.travel("Roll")
 	move()

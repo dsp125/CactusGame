@@ -279,6 +279,11 @@
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 192, 72 )
 
+[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
+current = true
+smoothing_enabled = true
+smoothing_speed = 40.0
+
 [node name="Rock" parent="YSort" instance=ExtResource( 3 )]
 
 [node name="TileMap" type="TileMap" parent="."]
