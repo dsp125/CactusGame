@@ -85,6 +85,12 @@ ui_roll={
  ]
 }
 
+[layer_names]
+
+2d_render/layer_1="World"
+2d_render/layer_2="PlayerHurtbox"
+2d_render/layer_3="EnemyHurtbox"
+
 [physics]
 
 common/enable_pause_aware_picking=true
