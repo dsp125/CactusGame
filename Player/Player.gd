@@ -8,7 +8,7 @@ const FRICTION = 500
 
 var velocity = Vector2.ZERO
 var prev_vector = Vector2.DOWN #USED TO SAVE LAST FACING DIRECTION
-var direction_vector = get_global_mouse_position() - position
+var direction_vector = Vector2.DOWN
 
 #Scenes instantiated via player script
 export var REF_THORN = preload("res://Hitboxes/Projectiles/Thorn.tscn")
@@ -18,6 +18,9 @@ onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var thornSpawn = $ThornSpawn
+
+#Audio Controllers
+onready var thornAudio = $ThornShoot
 
 enum PlayerStates{
 	MOVE,
@@ -79,9 +82,11 @@ func roll_state(_delta):
 func roll_animation_finished():
 	state = PlayerStates.MOVE
 
+
 # SHOOTING THORNS
 func shoot_thorn():
 	print("shooting thorn")
+	thornAudio.play()
 	if REF_THORN:
 		var thorn = REF_THORN.instance()
 		get_tree().current_scene.add_child(thorn)
@@ -120,7 +125,7 @@ func shoot_state(_delta):
 	
 	if Input.is_action_just_released("ui_attack"):
 		state = PlayerStates.MOVE
-
+	
 # UPDATE PLAYER POSITION
 func move():
 	velocity = move_and_slide(velocity)

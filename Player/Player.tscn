@@ -1,8 +1,9 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/lovebud-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Hurtboxes/Hurtbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Audio/SFX/thorn_shoot.mp3" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.0
@@ -982,7 +983,7 @@ states/Walk/node = SubResource( 25 )
 states/Walk/position = Vector2( 564, 81 )
 transitions = [ "Idle", "Walk", SubResource( 26 ), "Idle", "Roll", SubResource( 38 ), "Walk", "Idle", SubResource( 41 ), "Roll", "Idle", SubResource( 42 ), "Idle", "AttackIdle", SubResource( 71 ), "AttackIdle", "Idle", SubResource( 72 ), "AttackWalk", "Walk", SubResource( 73 ), "Walk", "AttackWalk", SubResource( 74 ), "AttackIdle", "AttackWalk", SubResource( 79 ), "AttackWalk", "AttackIdle", SubResource( 80 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -330.161, -90.8272 )
+graph_offset = Vector2( -330.161, -71.9632 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=28]
 
@@ -1056,6 +1057,10 @@ position = Vector2( 0, -11 )
 shape = SubResource( 61 )
 
 [node name="ThornSpawn" type="Position2D" parent="."]
-position = Vector2( 0, -15 )
+position = Vector2( 0, -4 )
+
+[node name="ThornShoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+panning_strength = 0.0
 
 [editable path="Hurtbox"]

@@ -282,6 +282,7 @@ position = Vector2( 192, 72 )
 
 [node name="HealingParticles" type="CPUParticles2D" parent="YSort/Player"]
 position = Vector2( 0, -20 )
+emitting = false
 amount = 3
 texture = ExtResource( 4 )
 emission_shape = 1

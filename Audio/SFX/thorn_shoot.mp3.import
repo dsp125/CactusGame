@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/thorn_shoot.mp3-4cc8522e1d66353fb52e846ca0ab54a5.mp3str"
+
+[deps]
+
+source_file="res://Audio/SFX/thorn_shoot.mp3"
+dest_files=[ "res://.import/thorn_shoot.mp3-4cc8522e1d66353fb52e846ca0ab54a5.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
