@@ -14,15 +14,15 @@ func destroy():
 
 func _on_Area2D_area_entered(area):
 	print(area)
-	pass # Replace with function body.
+
 
 
 func _on_Area2D_body_entered(body):
 	print(body)
-	pass # Replace with function body.
+	destroy()
+
 
 
 func _on_VisibilityNotifier2D_screen_exited():
 	print("leaving")
 	destroy()
-	pass # Replace with function body.

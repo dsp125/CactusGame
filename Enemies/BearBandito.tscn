@@ -1,0 +1,237 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://Sprites/bear bandito-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://Hurtboxes/Hurtbox.tscn" type="PackedScene" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.0
+height = 8.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 8.0
+height = 0.0
+
+[sub_resource type="Animation" id=3]
+resource_name = "Damaged"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "IdleDown"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 36, 37, 38, 39, 40, 41 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Throw"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8, 9, 10 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Walk Down"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 30, 31, 32, 33, 34, 35 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Walk Left"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 18, 19, 20, 21, 22, 23 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Walk Right"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14, 15, 16, 17 ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "Walk Up"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 26, 27, 28, 29 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "Throw"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "IdleDown"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "Walk Left"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "Walk Down"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "Walk Right"
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "Walk Up"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=18]
+blend_point_0/node = SubResource( 14 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 15 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 16 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 17 )
+blend_point_3/pos = Vector2( 0, -1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachine" id=8]
+states/Attack/node = SubResource( 21 )
+states/Attack/position = Vector2( 497, 176 )
+states/Idle/node = SubResource( 13 )
+states/Idle/position = Vector2( 631, 59 )
+states/Patrol/node = SubResource( 18 )
+states/Patrol/position = Vector2( 349, 59 )
+transitions = [ "Patrol", "Idle", SubResource( 19 ), "Idle", "Patrol", SubResource( 20 ), "Patrol", "Attack", SubResource( 22 ), "Attack", "Patrol", SubResource( 23 ), "Attack", "Idle", SubResource( 24 ), "Idle", "Attack", SubResource( 25 ) ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=9]
+
+[node name="BearBandito" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 3
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -1, 1 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -11 )
+hframes = 6
+vframes = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 2 )]
+collision_layer = 2
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 0, -11 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "IdleDown"
+anims/Damaged = SubResource( 3 )
+anims/IdleDown = SubResource( 10 )
+anims/RESET = SubResource( 4 )
+anims/Throw = SubResource( 5 )
+"anims/Walk Down" = SubResource( 11 )
+"anims/Walk Left" = SubResource( 6 )
+"anims/Walk Right" = SubResource( 7 )
+"anims/Walk Up" = SubResource( 12 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 8 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 9 )
+parameters/Patrol/blend_position = Vector2( 0, 0 )
+
+[editable path="Hurtbox"]

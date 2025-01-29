@@ -95,6 +95,11 @@ ui_attack={
 2d_render/layer_1="World"
 2d_render/layer_2="PlayerHurtbox"
 2d_render/layer_3="EnemyHurtbox"
+2d_physics/layer_1="World"
+2d_physics/layer_2="PlayerHurtbox"
+2d_physics/layer_3="EnemyHurtbox"
+2d_physics/layer_4="PlayerHitbox"
+2d_physics/layer_5="EnemyHitbox"
 
 [physics]
 

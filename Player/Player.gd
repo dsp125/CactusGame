@@ -8,7 +8,7 @@ const FRICTION = 500
 
 var velocity = Vector2.ZERO
 var prev_vector = Vector2.DOWN #USED TO SAVE LAST FACING DIRECTION
-var direction_vector = get_global_mouse_position() - position
+var direction_vector = Vector2.DOWN
 
 #Scenes instantiated via player script
 export var REF_THORN = preload("res://Hitboxes/Projectiles/Thorn.tscn")
