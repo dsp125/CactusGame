@@ -1,6 +1,6 @@
 extends Area2D
 
-export var speed = 200
+export var speed = 50
 var direction = Vector2.ZERO
 
 func _physics_process(delta):
@@ -24,4 +24,5 @@ func _on_Area2D_body_entered(body):
 
 func _on_VisibilityNotifier2D_screen_exited():
 	print("leaving")
+	destroy()
 	pass # Replace with function body.

@@ -60,7 +60,7 @@ func move_state(delta):
 	move()
 	
 	if Input.is_action_just_pressed("ui_roll"):
-		animationTree.set("parameters/Roll/blend_position", direction_vector)
+		animationTree.set("parameters/Roll/blend_position", input_vector)
 		state = PlayerStates.ROLL
 	
 	if Input.is_action_pressed("ui_attack"):
@@ -86,7 +86,7 @@ func shoot_thorn():
 		var thorn = REF_THORN.instance()
 		get_tree().current_scene.add_child(thorn)
 		thorn.global_position = thornSpawn.global_position
-		thorn.rotation = direction_vector.angle()
+		thorn.rotation = (get_global_mouse_position() - thorn.global_position).angle()
 		
 		#var thorn_rotation
 	
@@ -101,7 +101,7 @@ func shoot_state(_delta):
 		prev_vector = input_vector
 		animationTree.set("parameters/AttackIdle/blend_position", direction_vector)
 		animationTree.set("parameters/AttackWalk/blend_position", direction_vector)
-		animationTree.set("parameters/Roll/blend_position", direction_vector)
+		animationTree.set("parameters/Roll/blend_position", input_vector)
 		animationTree.set("parameters/Idle/blend_position", direction_vector)
 		animationTree.set("parameters/Walk/blend_position", direction_vector)
 		animationState.travel("AttackWalk")
@@ -115,7 +115,7 @@ func shoot_state(_delta):
 	move()
 	
 	if Input.is_action_just_pressed("ui_roll"):
-		animationTree.set("parameters/Roll/blend_position", direction_vector)
+		animationTree.set("parameters/Roll/blend_position", input_vector)
 		state = PlayerStates.ROLL
 	
 	if Input.is_action_just_released("ui_attack"):
