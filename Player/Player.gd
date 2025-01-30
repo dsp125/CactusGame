@@ -23,6 +23,9 @@ onready var thornSpawn = $ThornSpawn
 #Audio Controllers
 onready var thornAudio = $ThornShoot
 
+#Player Collisions
+onready var hurtbox = $Hurtbox
+
 enum PlayerStates{
 	MOVE,
 	ROLL,
@@ -138,4 +141,5 @@ func move():
 
 
 func _on_Hurtbox_area_entered(area):
+	print("Taking Damage")
 	stats.health -= 1
