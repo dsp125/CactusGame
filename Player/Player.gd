@@ -9,6 +9,7 @@ const FRICTION = 500
 var velocity = Vector2.ZERO
 var prev_vector = Vector2.DOWN #USED TO SAVE LAST FACING DIRECTION
 var direction_vector = Vector2.DOWN
+var stats = PlayerStats
 
 #Scenes instantiated via player script
 export var REF_THORN = preload("res://Hitboxes/Projectiles/Thorn.tscn")
@@ -29,6 +30,10 @@ enum PlayerStates{
 }
 
 var state = PlayerStates.MOVE
+
+func _ready():
+	stats.connect("no_health", self, "queue_free")
+	animationTree.active = true
 
 func _process(delta):
 	match state:
@@ -128,3 +133,9 @@ func shoot_state(_delta):
 # UPDATE PLAYER POSITION
 func move():
 	velocity = move_and_slide(velocity)
+
+# TAKE DAMAGE
+
+
+func _on_Hurtbox_area_entered(area):
+	stats.health -= 1

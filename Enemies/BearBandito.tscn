@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Sprites/bear bandito-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Hurtboxes/Hurtbox.tscn" type="PackedScene" id=2]
@@ -41,10 +41,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 36, 37, 38, 39, 40, 41 ]
+"values": [ 36, 37, 38 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -149,54 +149,64 @@ tracks/0/keys = {
 [sub_resource type="AnimationNodeAnimation" id=21]
 animation = "Throw"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=27]
 animation = "IdleDown"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeStateMachine" id=28]
+states/IdleDown/node = SubResource( 27 )
+states/IdleDown/position = Vector2( 625, 115 )
+start_node = "IdleDown"
+
+[sub_resource type="AnimationNodeAnimation" id=34]
 animation = "Walk Left"
 
-[sub_resource type="AnimationNodeAnimation" id=15]
-animation = "Walk Down"
-
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=35]
 animation = "Walk Right"
 
-[sub_resource type="AnimationNodeAnimation" id=17]
+[sub_resource type="AnimationNodeAnimation" id=36]
 animation = "Walk Up"
 
+[sub_resource type="AnimationNodeAnimation" id=37]
+animation = "Walk Down"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id=18]
-blend_point_0/node = SubResource( 14 )
+blend_point_0/node = SubResource( 34 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 15 )
-blend_point_1/pos = Vector2( 0, 1 )
-blend_point_2/node = SubResource( 16 )
-blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 17 )
-blend_point_3/pos = Vector2( 0, -1 )
+blend_point_1/node = SubResource( 35 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 36 )
+blend_point_2/pos = Vector2( 0, -1.2 )
+blend_point_3/node = SubResource( 37 )
+blend_point_3/pos = Vector2( 0, 1.2 )
+min_space = Vector2( -1, -1.2 )
+max_space = Vector2( 1, 1.2 )
 blend_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=19]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=20]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
 
 [sub_resource type="AnimationNodeStateMachine" id=8]
 states/Attack/node = SubResource( 21 )
 states/Attack/position = Vector2( 497, 176 )
-states/Idle/node = SubResource( 13 )
-states/Idle/position = Vector2( 631, 59 )
+states/Idle/node = SubResource( 28 )
+states/Idle/position = Vector2( 644, 59 )
 states/Patrol/node = SubResource( 18 )
-states/Patrol/position = Vector2( 349, 59 )
-transitions = [ "Patrol", "Idle", SubResource( 19 ), "Idle", "Patrol", SubResource( 20 ), "Patrol", "Attack", SubResource( 22 ), "Attack", "Patrol", SubResource( 23 ), "Attack", "Idle", SubResource( 24 ), "Idle", "Attack", SubResource( 25 ) ]
+states/Patrol/position = Vector2( 352, 59 )
+transitions = [ "Patrol", "Attack", SubResource( 22 ), "Attack", "Patrol", SubResource( 23 ), "Patrol", "Idle", SubResource( 29 ), "Idle", "Patrol", SubResource( 30 ), "Idle", "Attack", SubResource( 31 ), "Attack", "Idle", SubResource( 32 ) ]
+start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=9]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=33]
 
 [sub_resource type="CircleShape2D" id=26]
 radius = 87.0919
@@ -225,7 +235,6 @@ position = Vector2( 0, -11 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "IdleDown"
 anims/Damaged = SubResource( 3 )
 anims/IdleDown = SubResource( 10 )
 anims/RESET = SubResource( 4 )
@@ -240,7 +249,8 @@ tree_root = SubResource( 8 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 9 )
-parameters/Patrol/blend_position = Vector2( 0, 0 )
+parameters/Idle/playback = SubResource( 33 )
+parameters/Patrol/blend_position = Vector2( 0.277338, -0.734483 )
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
 max_health = 8

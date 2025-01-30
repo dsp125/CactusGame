@@ -1068,4 +1068,6 @@ position = Vector2( 0, -4 )
 stream = ExtResource( 4 )
 panning_strength = 0.0
 
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+
 [editable path="Hurtbox"]
