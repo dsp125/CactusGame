@@ -1,5 +1,6 @@
 extends Node2D
 
+
 export var speed: float = 80
 export var distance: float = 100
 var duration:float = distance/speed
