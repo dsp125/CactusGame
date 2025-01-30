@@ -15,7 +15,7 @@ enum {
 var knockback = Vector2.ZERO
 var velocity = Vector2.ZERO
 var state = IDLE
-var inspect_duration: float = 2.0
+var inspect_duration: float = 5.0
 var inspect_timer: float = 0.0
 var inspect_target = Vector2.ZERO
 
@@ -29,7 +29,7 @@ onready var origin = global_position
 
 
 func _physics_process(delta):
-	print(knockback)
+	#print(knockback)
 	knockback = knockback.move_toward(Vector2.ZERO,200 * delta)
 	knockback = move_and_slide(knockback)
 	
@@ -55,13 +55,18 @@ func _physics_process(delta):
 			if inspect_timer <= inspect_duration:
 				inspect_timer += delta
 				inspect_for_player(delta)
+				animationTree.set("parameters/Patrol/blend_position", inspect_target)
+				animationState.travel("Patrol")
 			else:
 				inspect_timer = 0.0
 				state = RETURN
 		RETURN:
 			if global_position.distance_to(origin) < 0.25:
+				animationState.travel("Idle")
 				state = IDLE ## set to patrol when implemented
 			else:
+				animationTree.set("parameters/Patrol/blend_position", origin)
+				animationState.travel("Patrol")
 				return_to_origin(delta)
 			
 
@@ -73,7 +78,6 @@ func seek_player():
 	
 func _on_Hurtbox_area_entered(area:Area2D):
 	stats.health -= 1
-	print(area)
 	knockback = area.knockback_vector * 100
 	inspect_target = Vector2(-area.knockback_vector.x,-area.knockback_vector.y)
 	state = INSPECT
