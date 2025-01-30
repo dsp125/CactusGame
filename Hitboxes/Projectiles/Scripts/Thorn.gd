@@ -1,6 +1,6 @@
 extends Node2D
 
-export var speed = 80
+export var speed = 90
 var direction = Vector2.ZERO
 onready var hitbox = $Hitbox
  
