@@ -66,6 +66,7 @@ func _physics_process(delta):
 				patrol_controller.start_patrol_timer(rand_range(1,3))
 
 		CHASE:
+			print("CHASING")
 			play_patrol_footsteps()
 			var player = player_detection_zone.player
 			if player != null:
@@ -75,12 +76,14 @@ func _physics_process(delta):
 					animationState.travel("Patrol")
 					velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 				else:
+					velocity = Vector2.ZERO
 					animationTree.set("parameters/Attack/blend_position", direction)
 					animationState.travel("Attack")
 			if player == null:
 				velocity = Vector2.ZERO
 				state = IDLE
 		INSPECT:
+			print("INSPECTING")
 			play_patrol_footsteps()
 			seek_player()
 			if inspect_timer <= inspect_duration:
@@ -92,6 +95,7 @@ func _physics_process(delta):
 				inspect_timer = 0.0
 				state = RETURN
 		RETURN:
+			print("RETURNING")
 			play_patrol_footsteps()
 			seek_player()
 			if global_position.distance_to(origin) < 0.25:

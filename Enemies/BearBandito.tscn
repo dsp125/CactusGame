@@ -382,7 +382,7 @@ states/Patrol/node = SubResource( 18 )
 states/Patrol/position = Vector2( 352, 59 )
 transitions = [ "Patrol", "Idle", SubResource( 29 ), "Idle", "Patrol", SubResource( 30 ), "Patrol", "Attack", SubResource( 46 ), "Attack", "Patrol", SubResource( 47 ), "Attack", "Idle", SubResource( 48 ), "Idle", "Attack", SubResource( 49 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -436.005, -15.14 )
+graph_offset = Vector2( -226.108, 32.512 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=9]
 
@@ -431,7 +431,7 @@ anims/RESET = SubResource( 4 )
 tree_root = SubResource( 8 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 9 )
-parameters/Attack/blend_position = Vector2( -0.190326, -0.0862069 )
+parameters/Attack/blend_position = Vector2( 0.299525, -0.0603448 )
 parameters/Idle/playback = SubResource( 33 )
 parameters/Patrol/blend_position = Vector2( 0.277338, -0.734483 )
 
@@ -453,7 +453,6 @@ shape = SubResource( 26 )
 [node name="FootstepPatrol" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )
 pitch_scale = 0.83
-bus = "SFX"
 script = ExtResource( 8 )
 
 [node name="ThrowSpawn" type="Position2D" parent="."]
