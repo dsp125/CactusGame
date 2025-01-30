@@ -1,12 +1,13 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/desert_test.png" type="Texture" id=2]
 [ext_resource path="res://Objects/Rock.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Sprites/healing.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Particles/healing.png" type="Texture" id=4]
 [ext_resource path="res://Enemies/BearBandito.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Sprites/Prototype_DesertTiles.png" type="Texture" id=6]
+[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ProcGenDesert.gd" type="Script" id=7]
+[ext_resource path="res://Sprites/Prototype_DesertTiles.png" type="Texture" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
 points = PoolVector2Array( 0, 0, 2.31601, 0, 2.89743, 16, 0, 16 )
@@ -85,7 +86,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="TileSet" id=2]
 0/name = "Prototype_DesertTiles.png 0"
-0/texture = ExtResource( 6 )
+0/texture = ExtResource( 8 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 64, 192, 64 )
@@ -254,7 +255,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 } ]
 0/z_index = 0
 1/name = "Prototype_DesertTiles.png 1"
-1/texture = ExtResource( 6 )
+1/texture = ExtResource( 8 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 128, 32, 32, 32 )
@@ -284,7 +285,6 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
-[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=6]
 
 [sub_resource type="TileSet" id=1]
 0/name = "desert_test.png 0"

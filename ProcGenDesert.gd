@@ -3,8 +3,7 @@ extends TileMap
 # Map size (30x40)
 const MAP_WIDTH = 30
 const MAP_HEIGHT = 40
-var fill_percentage = 0.96
-const SEED_VALUE = 3605435
+var fill_percentage = 0.97
 
 # Tile indices (assuming 0 = wall and 1 = path)
 const WALL_TILE = 1
@@ -14,13 +13,31 @@ const PATH_TILE = 0
 var map_grid : Array = []
 var frontier : Array = []
 var visited : Array = []
+var playable_tiles : Array = []
 
 # Start position for the random walk
 var start_x : int = 15
 var start_y : int = 20
 
+var rand = RandomNumberGenerator.new()
+
 func _ready():
-	rand_seed(SEED_VALUE)
+	#rand.set_seed(SEED_VALUE)
+	# Initialize map with walls
+	#initialize_map()
+	# Generate the pathways using a random walk
+	#generate_random_walk_with_target_fill()
+	# Optional: Ensure connectivity (flood fill, etc.)
+	#remove_1x1_holes()
+	# Draw the generated map to the TileMap
+	#print(playable_tiles)
+	#draw_map()
+	
+	#update_bitmask_region()
+	pass
+
+func run_generation(seed_number:int):
+	rand.set_seed(seed_number)
 	# Initialize map with walls
 	initialize_map()
 	# Generate the pathways using a random walk
@@ -28,7 +45,7 @@ func _ready():
 	# Optional: Ensure connectivity (flood fill, etc.)
 	remove_1x1_holes()
 	# Draw the generated map to the TileMap
-	print(map_grid)
+	#print(playable_tiles)
 	draw_map()
 	
 	update_bitmask_region()
@@ -44,19 +61,21 @@ func initialize_map():
 
 # Generate random walk while filling only the desired percentage of the map
 func generate_random_walk_with_target_fill():
-	var x = randi() % MAP_WIDTH - 1
-	var y = randi() % MAP_HEIGHT - 1
+	var x = rand.randi_range(1,MAP_WIDTH-1)
+	var y = rand.randi_range(1,MAP_HEIGHT-1)
+	playable_tiles.append([x*16,y*16])
 	map_grid[y][x] = PATH_TILE
 
 	var steps = 0
 	while steps < (MAP_HEIGHT * MAP_WIDTH * fill_percentage) :  # We want to fill up to the target fill count
-		var direction = Vector2(randi() % 3 - 1, randi() % 3 - 1)
+		var direction = Vector2(rand.randi_range(-1,1),rand.randi_range(-1,1))
 		x += direction.x
 		y += direction.y
 		x = clamp(x, 0, MAP_WIDTH - 1)
 		y = clamp(y, 0, MAP_HEIGHT - 1)
 		
 		if map_grid[y][x] != PATH_TILE:  # Only carve if the tile is still a wall
+			playable_tiles.append([x*16,y*16])
 			map_grid[y][x] = PATH_TILE
 			steps += 1
 
@@ -86,6 +105,7 @@ func remove_1x1_holes():
 			# Check if this tile is a wall and is surrounded by paths
 			if map_grid[y][x] == WALL_TILE:
 				if map_grid[y-1][x] == PATH_TILE and map_grid[y+1][x] == PATH_TILE and map_grid[y][x-1] == PATH_TILE and map_grid[y][x+1] == PATH_TILE:
+					playable_tiles.append([x*16,y*16])
 					map_grid[y][x] = PATH_TILE  # Convert it to a path tile
 
 # Prim's Algorithm for ensuring connectivity (spanning tree)

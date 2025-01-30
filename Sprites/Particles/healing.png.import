@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/healing.png-27c2c8c0834859affcbc7998512a1a55.stex"
+path="res://.import/healing.png-37eb777231d20cd69b6a92d623fcf33a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/healing.png"
-dest_files=[ "res://.import/healing.png-27c2c8c0834859affcbc7998512a1a55.stex" ]
+source_file="res://Sprites/Particles/healing.png"
+dest_files=[ "res://.import/healing.png-37eb777231d20cd69b6a92d623fcf33a.stex" ]
 
 [params]
 
