@@ -284,6 +284,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
+[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=6]
 
 [sub_resource type="TileSet" id=1]
 0/name = "desert_test.png 0"
@@ -598,3 +599,9 @@ color = Color( 0.4, 0.901961, 0.309804, 1 )
 current = true
 smoothing_enabled = true
 smoothing_speed = 40.0
+
+[node name="HealthUI" parent="YSort/Player/Camera2D" instance=ExtResource( 6 )]
+margin_left = -155.0
+margin_top = -89.0
+margin_right = -115.0
+margin_bottom = -49.0
