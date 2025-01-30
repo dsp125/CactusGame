@@ -21,7 +21,9 @@ func _on_Timer_timeout():
 	self.invincible = false
 
 func _on_Hurtbox_invincibility_started():
+	monitoring = false
 	monitorable = false
 
 func _on_Hurtbox_invincibility_ended():
+	monitoring = true
 	monitorable = true

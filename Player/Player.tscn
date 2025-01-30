@@ -992,7 +992,7 @@ radius = 8.0
 height = 0.0
 
 [node name="Player" type="KinematicBody2D"]
-collision_layer = 2
+collision_layer = 64
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -1046,7 +1046,6 @@ anims/ThornUp = SubResource( 60 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 27 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 28 )
 parameters/AttackIdle/blend_position = Vector2( 0, 0 )
 parameters/AttackWalk/blend_position = Vector2( 0, 0 )
@@ -1056,6 +1055,7 @@ parameters/Walk/blend_position = Vector2( 0.0047543, 0.594828 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 2
+collision_mask = 17
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -11 )

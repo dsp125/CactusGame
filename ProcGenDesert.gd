@@ -28,7 +28,7 @@ func _ready():
 	# Optional: Ensure connectivity (flood fill, etc.)
 	remove_1x1_holes()
 	# Draw the generated map to the TileMap
-	print(map_grid)
+	#print(map_grid)
 	draw_map()
 	
 	update_bitmask_region()

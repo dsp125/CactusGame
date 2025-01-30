@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Cactus 32x32aseprite.png-47a61a62f5139069b8f5a3cb0e7fb8f0.stex"
+path="res://.import/honeypot.png-9d1959df401b5196d0b1e41bbe3c8c1f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Cactus 32x32aseprite.png"
-dest_files=[ "res://.import/Cactus 32x32aseprite.png-47a61a62f5139069b8f5a3cb0e7fb8f0.stex" ]
+source_file="res://Sprites/honeypot.png"
+dest_files=[ "res://.import/honeypot.png-9d1959df401b5196d0b1e41bbe3c8c1f.stex" ]
 
 [params]
 

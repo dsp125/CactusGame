@@ -3,6 +3,7 @@ extends KinematicBody2D
 export var ACCELERATION = 300
 export var MAX_SPEED = 25
 export var FRICTION = 200
+export var KNOCKBACK_SCALER = 70
 
 enum {
 	IDLE,
@@ -19,7 +20,6 @@ var inspect_duration: float = 5.0
 var inspect_timer: float = 0.0
 var inspect_target = Vector2.ZERO
 
-
 onready var stats = $Stats
 onready var player_detection_zone = $PlayerDetectionZone
 onready var animationPlayer = $AnimationPlayer
@@ -27,6 +27,12 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var patrol_controller = $PatrolController
 onready var origin = global_position
+onready var throwSpawn = $ThrowSpawn
+
+export var REF_FISH = preload("res://Hitboxes/Projectiles/Fish.tscn")
+
+func _ready():
+	animationTree.active = true
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO,200 * delta)
@@ -58,9 +64,13 @@ func _physics_process(delta):
 			var player = player_detection_zone.player
 			if player != null:
 				var direction = global_position.direction_to(player.global_position)
-				animationTree.set("parameters/Patrol/blend_position", direction)
-				animationState.travel("Patrol")
-				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+				if global_position.distance_to(player.global_position) >= 80:
+					animationTree.set("parameters/Patrol/blend_position", direction)
+					animationState.travel("Patrol")
+					velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+				else:
+					animationTree.set("parameters/Attack/blend_position", direction)
+					animationState.travel("Attack")
 			if player == null:
 				velocity = Vector2.ZERO
 				state = IDLE
@@ -95,7 +105,7 @@ func pick_random_state(state_list):
 
 func _on_Hurtbox_area_entered(area:Area2D):
 	stats.health -= 1
-	knockback = area.knockback_vector * 100
+	knockback = area.knockback_vector * KNOCKBACK_SCALER
 	inspect_target = Vector2(-area.knockback_vector.x,-area.knockback_vector.y)
 	state = INSPECT
 
@@ -109,3 +119,12 @@ func return_to_origin(delta):
 
 func _on_Stats_no_health():
 	queue_free() # Replace with function body.
+
+func throw_object():
+	#throwAudio.play()
+	if REF_FISH:
+		var fish = REF_FISH.instance()
+		var player = player_detection_zone.player
+		get_tree().current_scene.add_child(fish)
+		fish.global_position = throwSpawn.global_position
+		fish.rotation = fish.global_position.direction_to(player.global_position).angle()

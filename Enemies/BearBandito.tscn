@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Sprites/bear bandito-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Hurtboxes/Hurtbox.tscn" type="PackedScene" id=2]
@@ -64,8 +64,9 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-resource_name = "Throw"
-length = 0.5
+resource_name = "Throw Down"
+length = 0.8
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -77,6 +78,161 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 6, 7, 8, 9, 10 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ThrowSpawn:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 3, -1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "throw_object"
+} ]
+}
+
+[sub_resource type="Animation" id=38]
+resource_name = "Throw Left"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 54, 55, 56, 57, 58 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ThrowSpawn:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -10, -8 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "throw_object"
+} ]
+}
+
+[sub_resource type="Animation" id=39]
+resource_name = "Throw Right"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 48, 49, 50, 51, 52 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ThrowSpawn:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 8, -8 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "throw_object"
+} ]
+}
+
+[sub_resource type="Animation" id=40]
+resource_name = "Throw Up"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 42, 43, 44, 45, 46 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ThrowSpawn:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, -17 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "throw_object"
+} ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -147,8 +303,28 @@ tracks/0/keys = {
 "values": [ 24, 25, 26, 27, 28, 29 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=21]
-animation = "Throw"
+[sub_resource type="AnimationNodeAnimation" id=41]
+animation = "Throw Left"
+
+[sub_resource type="AnimationNodeAnimation" id=42]
+animation = "Throw Down"
+
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "Throw Up"
+
+[sub_resource type="AnimationNodeAnimation" id=44]
+animation = "Throw Right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=45]
+blend_point_0/node = SubResource( 41 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 42 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 43 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 44 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id=27]
 animation = "IdleDown"
@@ -183,34 +359,35 @@ min_space = Vector2( -1, -1.2 )
 max_space = Vector2( 1, 1.2 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=22]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=23]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=29]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
 
 [sub_resource type="AnimationNodeStateMachine" id=8]
-states/Attack/node = SubResource( 21 )
-states/Attack/position = Vector2( 497, 176 )
+states/Attack/node = SubResource( 45 )
+states/Attack/position = Vector2( 491.995, 175.72 )
 states/Idle/node = SubResource( 28 )
 states/Idle/position = Vector2( 644, 59 )
 states/Patrol/node = SubResource( 18 )
 states/Patrol/position = Vector2( 352, 59 )
-transitions = [ "Patrol", "Attack", SubResource( 22 ), "Attack", "Patrol", SubResource( 23 ), "Patrol", "Idle", SubResource( 29 ), "Idle", "Patrol", SubResource( 30 ), "Idle", "Attack", SubResource( 31 ), "Attack", "Idle", SubResource( 32 ) ]
+transitions = [ "Patrol", "Idle", SubResource( 29 ), "Idle", "Patrol", SubResource( 30 ), "Patrol", "Attack", SubResource( 46 ), "Attack", "Patrol", SubResource( 47 ), "Attack", "Idle", SubResource( 48 ), "Idle", "Attack", SubResource( 49 ) ]
 start_node = "Idle"
+graph_offset = Vector2( -436.005, -15.14 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=9]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=33]
 
 [sub_resource type="CircleShape2D" id=26]
-radius = 87.0919
+radius = 71.007
 
 [node name="BearBandito" type="KinematicBody2D"]
 collision_layer = 32
@@ -221,7 +398,7 @@ position = Vector2( -1, 1 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -11 )
 hframes = 6
-vframes = 7
+vframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -239,7 +416,10 @@ shape = SubResource( 2 )
 anims/Damaged = SubResource( 3 )
 anims/IdleDown = SubResource( 10 )
 anims/RESET = SubResource( 4 )
-anims/Throw = SubResource( 5 )
+"anims/Throw Down" = SubResource( 5 )
+"anims/Throw Left" = SubResource( 38 )
+"anims/Throw Right" = SubResource( 39 )
+"anims/Throw Up" = SubResource( 40 )
 "anims/Walk Down" = SubResource( 11 )
 "anims/Walk Left" = SubResource( 6 )
 "anims/Walk Right" = SubResource( 7 )
@@ -248,22 +428,28 @@ anims/Throw = SubResource( 5 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 8 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 9 )
+parameters/Attack/blend_position = Vector2( -0.190326, -0.0862069 )
 parameters/Idle/playback = SubResource( 33 )
 parameters/Patrol/blend_position = Vector2( 0.277338, -0.734483 )
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
-max_health = 100
+max_health = 5
+max_stamina = 5
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
+collision_mask = 64
 monitorable = false
+radius = 120
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 position = Vector2( 0, -11 )
 shape = SubResource( 26 )
 
 [node name="PatrolController" parent="." instance=ExtResource( 6 )]
+
+[node name="ThrowSpawn" type="Position2D" parent="."]
+position = Vector2( -1, -17 )
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
