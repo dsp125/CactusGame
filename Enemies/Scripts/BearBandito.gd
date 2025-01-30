@@ -29,6 +29,7 @@ onready var origin = global_position
 
 
 func _physics_process(delta):
+	print(knockback)
 	knockback = knockback.move_toward(Vector2.ZERO,200 * delta)
 	knockback = move_and_slide(knockback)
 	
@@ -46,6 +47,7 @@ func _physics_process(delta):
 				animationState.travel("Patrol")
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 			if player == null:
+				print("moving to idle")
 				animationState.travel("Idle")
 				velocity = Vector2.ZERO
 				state = IDLE
