@@ -10,7 +10,6 @@ onready var timer = $Timer
 func update_target_position():
 	var target_vector = Vector2(rand_range(-patrol_range,patrol_range), rand_range(-patrol_range,patrol_range))
 	target_position = start_position + target_vector
-	print(target_position)
 
 func get_time_left():
 	return timer.time_left

@@ -3,7 +3,7 @@ extends KinematicBody2D
 const ACCEL = 400
 const MAX_SPD = 60
 const ROLL_SPEED = 75
-const ATTACK_SPEED = 45
+const ATTACK_SPEED = 40
 const FRICTION = 500
 
 var velocity = Vector2.ZERO
@@ -90,6 +90,8 @@ func move_state(delta):
 func roll_state(_delta):
 	stop_footsteps()
 	play_roll_audio()
+
+	hurtbox.start_invincibility(0.6)
 	velocity = prev_vector * ROLL_SPEED
 	animationState.travel("Roll")
 	move()
@@ -146,8 +148,6 @@ func move():
 	velocity = move_and_slide(velocity)
 
 # TAKE DAMAGE
-
-
 func _on_Hurtbox_area_entered(area):
 	print("Taking Damage")
 	stats.health -= 1
@@ -167,3 +167,7 @@ func play_roll_audio():
 func stop_roll_audio():
 	if roll_audio.playing:
 		roll_audio.stop()
+
+func invulnerable():
+	hurtbox.set_invincible(true)
+
