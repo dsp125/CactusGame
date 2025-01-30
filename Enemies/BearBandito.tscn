@@ -238,6 +238,7 @@ anims/Throw = SubResource( 5 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 8 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource( 9 )
 parameters/Patrol/blend_position = Vector2( 0, 0 )
 
