@@ -22,6 +22,9 @@ onready var thornSpawn = $ThornSpawn
 
 #Audio Controllers
 onready var thornAudio = $ThornShoot
+onready var footstep_audio = $Footsteps
+onready var roll_audio = $PlayerRoll
+
 
 #Player Collisions
 onready var hurtbox = $Hurtbox
@@ -57,6 +60,7 @@ func move_state(delta):
 	input_vector = input_vector.normalized()
 		
 	if input_vector != Vector2.ZERO:
+		play_footsteps()
 		prev_vector = input_vector
 		animationTree.set("parameters/Idle/blend_position", direction_vector)
 		animationTree.set("parameters/Walk/blend_position", direction_vector)
@@ -64,6 +68,7 @@ func move_state(delta):
 		velocity = velocity.move_toward(input_vector * MAX_SPD, ACCEL * FRICTION * delta)
 		
 	else:
+		stop_footsteps()
 		animationTree.set("parameters/Idle/blend_position", direction_vector)
 		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION*delta)
@@ -83,11 +88,14 @@ func move_state(delta):
 		
 # ROLLING
 func roll_state(_delta):
+	stop_footsteps()
+	play_roll_audio()
 	velocity = prev_vector * ROLL_SPEED
 	animationState.travel("Roll")
 	move()
 
 func roll_animation_finished():
+	stop_roll_audio()
 	state = PlayerStates.MOVE
 
 
@@ -143,3 +151,19 @@ func move():
 func _on_Hurtbox_area_entered(area):
 	print("Taking Damage")
 	stats.health -= 1
+	
+func play_footsteps():
+	if not footstep_audio.playing:
+		footstep_audio.play()
+	
+func stop_footsteps():
+	if footstep_audio.playing:
+		footstep_audio.stop()
+		
+func play_roll_audio():
+	if not roll_audio.playing:
+		roll_audio.play()
+	
+func stop_roll_audio():
+	if roll_audio.playing:
+		roll_audio.stop()

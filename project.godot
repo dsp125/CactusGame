@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="Thorn Heart"
+config/name="Luvbud"
 run/main_scene="res://World.tscn"
 
 [autoload]

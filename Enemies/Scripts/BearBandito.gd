@@ -28,11 +28,15 @@ onready var animationState = animationTree.get("parameters/playback")
 onready var patrol_controller = $PatrolController
 onready var origin = global_position
 
+#Audio Controllers
+onready var patrol_audio = $FootstepPatrol
+
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO,200 * delta)
 	knockback = move_and_slide(knockback)
 	match state:
 		IDLE:
+			stop_patrol_footsteps()
 			animationState.travel("Idle")
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			seek_player()
@@ -40,6 +44,7 @@ func _physics_process(delta):
 				state = pick_random_state([IDLE,PATROL,PATROL])
 				patrol_controller.start_patrol_timer(rand_range(1,3))
 		PATROL:
+			play_patrol_footsteps()
 			seek_player()
 			if patrol_controller.get_time_left() == 0:
 				state = pick_random_state([IDLE,PATROL,PATROL])
@@ -55,6 +60,7 @@ func _physics_process(delta):
 				patrol_controller.start_patrol_timer(rand_range(1,3))
 
 		CHASE:
+			play_patrol_footsteps()
 			var player = player_detection_zone.player
 			if player != null:
 				var direction = global_position.direction_to(player.global_position)
@@ -65,6 +71,7 @@ func _physics_process(delta):
 				velocity = Vector2.ZERO
 				state = IDLE
 		INSPECT:
+			play_patrol_footsteps()
 			if inspect_timer <= inspect_duration:
 				inspect_timer += delta
 				inspect_for_player(delta)
@@ -74,6 +81,7 @@ func _physics_process(delta):
 				inspect_timer = 0.0
 				state = RETURN
 		RETURN:
+			play_patrol_footsteps()
 			if global_position.distance_to(origin) < 0.25:
 				animationState.travel("Idle")
 				state = IDLE ## set to patrol when implemented
@@ -109,3 +117,11 @@ func return_to_origin(delta):
 
 func _on_Stats_no_health():
 	queue_free() # Replace with function body.
+
+func play_patrol_footsteps():
+	if not patrol_audio.playing:
+		patrol_audio.play()
+	
+func stop_patrol_footsteps():
+	if patrol_audio.playing:
+		patrol_audio.stop()

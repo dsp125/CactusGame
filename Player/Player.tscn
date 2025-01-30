@@ -1,9 +1,11 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/lovebud-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Hurtboxes/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Audio/SFX/thorn_shoot.mp3" type="AudioStream" id=4]
+[ext_resource path="res://Audio/SFX/footstep_chase.mp3" type="AudioStream" id=5]
+[ext_resource path="res://Audio/SFX/player_dive.mp3" type="AudioStream" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.0
@@ -1067,6 +1069,12 @@ position = Vector2( 0, -4 )
 [node name="ThornShoot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 panning_strength = 0.0
+
+[node name="Footsteps" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="PlayerRoll" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 

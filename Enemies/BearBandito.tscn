@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Sprites/bear bandito-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Hurtboxes/Hurtbox.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Stats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Enemies/PatrolController.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Audio/SFX/footstep_chase.mp3" type="AudioStream" id=7]
+[ext_resource path="res://Enemies/FootstepPatrol.gd" type="Script" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.0
@@ -264,6 +266,12 @@ position = Vector2( 0, -11 )
 shape = SubResource( 26 )
 
 [node name="PatrolController" parent="." instance=ExtResource( 6 )]
+
+[node name="FootstepPatrol" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+pitch_scale = 0.83
+bus = "SFX"
+script = ExtResource( 8 )
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
