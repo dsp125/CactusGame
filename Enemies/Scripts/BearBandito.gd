@@ -82,6 +82,7 @@ func _physics_process(delta):
 				state = IDLE
 		INSPECT:
 			play_patrol_footsteps()
+			seek_player()
 			if inspect_timer <= inspect_duration:
 				inspect_timer += delta
 				inspect_for_player(delta)
@@ -92,6 +93,7 @@ func _physics_process(delta):
 				state = RETURN
 		RETURN:
 			play_patrol_footsteps()
+			seek_player()
 			if global_position.distance_to(origin) < 0.25:
 				animationState.travel("Idle")
 				state = IDLE ## set to patrol when implemented

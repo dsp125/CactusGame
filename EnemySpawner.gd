@@ -15,7 +15,7 @@ func spawn_bears(count:int,playable:Array,seed_value:int):
 	for i in range(0,count):
 		var bear = bear_banditos.instance()
 		bear.position = get_valid_position(playable)
-		add_child(bear)
+		get_tree().current_scene.add_child(bear)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -4,7 +4,7 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export var SEED_VALUE = 3605435
+export var SEED_VALUE = 69420
 
 #Onready
 onready var proc_gen_map_base = $ProcGenDesert
