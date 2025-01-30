@@ -85,7 +85,6 @@ func roll_animation_finished():
 
 # SHOOTING THORNS
 func shoot_thorn():
-	print("shooting thorn")
 	thornAudio.play()
 	if REF_THORN:
 		var thorn = REF_THORN.instance()

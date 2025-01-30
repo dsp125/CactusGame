@@ -1,7 +1,10 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Sprites/bear bandito-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Hurtboxes/Hurtbox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Enemies/Scripts/BearBandito.gd" type="Script" id=3]
+[ext_resource path="res://Stats.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.0
@@ -195,9 +198,12 @@ transitions = [ "Patrol", "Idle", SubResource( 19 ), "Idle", "Patrol", SubResour
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=9]
 
+[sub_resource type="CircleShape2D" id=26]
+radius = 87.0919
+
 [node name="BearBandito" type="KinematicBody2D"]
-collision_layer = 4
-collision_mask = 3
+collision_layer = 32
+script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -1, 1 )
@@ -211,7 +217,8 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 2 )]
-collision_layer = 2
+collision_layer = 4
+collision_mask = 9
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -11 )
@@ -234,4 +241,17 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 9 )
 parameters/Patrol/blend_position = Vector2( 0, 0 )
 
+[node name="Stats" parent="." instance=ExtResource( 4 )]
+max_health = 3
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+position = Vector2( 0, -11 )
+shape = SubResource( 26 )
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+
 [editable path="Hurtbox"]
+[editable path="PlayerDetectionZone"]

@@ -100,6 +100,7 @@ ui_attack={
 2d_physics/layer_3="EnemyHurtbox"
 2d_physics/layer_4="PlayerHitbox"
 2d_physics/layer_5="EnemyHitbox"
+2d_physics/layer_6="Enemies"
 
 [physics]
 
