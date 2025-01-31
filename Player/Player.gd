@@ -42,7 +42,8 @@ enum PlayerStates{
 	MOVE,
 	ROLL,
 	SHOOT,
-	DAMAGED
+	DAMAGED,
+	SPIRAL
 }
 
 var state = PlayerStates.MOVE
@@ -65,9 +66,11 @@ func _process(delta):
 			
 		PlayerStates.DAMAGED:
 			damaged_state(delta)
+			
+		PlayerStates.SPIRAL:
+			spiral_state(delta)
 	
 func move_state(delta):
-	stats.stamina += delta*20
 	var input_vector = Vector2.ZERO
 	direction_vector = get_global_mouse_position() - position
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -76,6 +79,7 @@ func move_state(delta):
 	hitbox.knockback_vector = input_vector
 		
 	if input_vector != Vector2.ZERO:
+		stats.stamina += delta*20
 		play_footsteps()
 		prev_vector = input_vector
 		animationTree.set("parameters/Idle/blend_position", direction_vector)
@@ -84,6 +88,7 @@ func move_state(delta):
 		velocity = velocity.move_toward(input_vector * MAX_SPD, ACCEL * FRICTION * delta)
 		
 	else:
+		stats.stamina += delta*40
 		stop_footsteps()
 		animationTree.set("parameters/Idle/blend_position", direction_vector)
 		animationState.travel("Idle")
@@ -93,6 +98,10 @@ func move_state(delta):
 	
 	if Input.is_action_just_pressed("ui_reload"):
 		reload(reload_time)
+		
+	if Input.is_action_just_pressed("ui_thorn_spiral"):
+		animationTree.set("parameters/ThornSpiral/blend_position", direction_vector)
+		state = PlayerStates.SPIRAL
 	
 	if Input.is_action_just_pressed("ui_roll"):
 		if(stats.stamina >= 25):
@@ -122,7 +131,26 @@ func roll_animation_finished():
 	hurtbox.set_invincible(false)
 	state = PlayerStates.MOVE
 
-
+#THORNSPIRAL
+func spiral_state(_delta):
+	animationState.travel("ThornSpiral")
+	move()
+	
+func spiral_animation_finished():
+	state = PlayerStates.MOVE
+	
+func spiral_thorn_shoot(direction:Vector2):
+	var rotation_angle_deg = deg2rad(-15)
+	for i in range(24):
+		direction = direction.rotated(rotation_angle_deg)
+		thornAudio.play()
+		if REF_THORN:
+			var thorn = REF_THORN.instance()
+			get_tree().current_scene.add_child(thorn)
+			thorn.global_position = thornSpawn.global_position
+			thorn.rotation = direction.angle()
+		yield(get_tree().create_timer(0.02), "timeout")
+		
 # SHOOTING THORNS
 func shoot_thorn():
 	if ammo == 0:

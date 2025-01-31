@@ -5,8 +5,8 @@ extends Node2D
 # var a = 2
 # var b = "text"
 export var SEED_VALUE = 69420
-export var bear_count = 4
-export var sunspot_count = 10
+export var bear_count = 20
+export var sunspot_count = 3
 
 #Onready
 onready var proc_gen_map_base = $ProcGenDesert

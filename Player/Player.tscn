@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=2]
+[gd_scene load_steps=102 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/lovebud-Sheet.png" type="Texture" id=2]
@@ -475,7 +475,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 181, 182, 183, 184, 185, 186 ]
+"values": [ 182, 183, 184, 185, 186, 181 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -484,7 +484,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.4 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -521,7 +521,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 226, 227, 228, 229, 230, 231 ]
+"values": [ 227, 228, 229, 230, 231, 226 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -530,7 +530,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.4 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -567,7 +567,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 217, 218, 219, 220, 221, 222 ]
+"values": [ 218, 219, 220, 221, 222, 217 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -576,7 +576,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.4 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -613,7 +613,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 235, 236, 237, 238, 239, 240 ]
+"values": [ 236, 237, 238, 239, 240, 235 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -622,7 +622,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.4 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -659,7 +659,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 190, 191, 192, 193, 194, 195 ]
+"values": [ 191, 192, 193, 194, 195, 190 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -668,7 +668,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.4 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -705,7 +705,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 208, 209, 210, 211, 212, 213 ]
+"values": [ 209, 210, 211, 212, 213, 208 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -714,7 +714,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.4 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -751,7 +751,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 172, 173, 174, 175, 176, 177 ]
+"values": [ 173, 174, 175, 176, 177, 172 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -760,7 +760,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.4 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -783,6 +783,50 @@ tracks/2/keys = {
 "values": [ Vector2( 6, -10 ) ]
 }
 
+[sub_resource type="Animation" id=94]
+resource_name = "ThornSpiral"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 162, 163, 164, 165, 166, 167, 182, 185, 176, 173, 200, 203, 194, 191 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ Vector2( 0, 1 ) ],
+"method": "spiral_thorn_shoot"
+}, {
+"args": [  ],
+"method": "spiral_animation_finished"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ThornSpawn:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3, 0.5, 0.7, 0.9 ),
+"transitions": PoolRealArray( 0.287174, 0.287175, 0.287175, 0.287175 ),
+"update": 0,
+"values": [ Vector2( 0, -4 ), Vector2( 6, -4 ), Vector2( 6, -15 ), Vector2( -6, -15 ) ]
+}
+
 [sub_resource type="Animation" id=60]
 resource_name = "ThornUp"
 length = 0.6
@@ -797,7 +841,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 199, 200, 201, 202, 203, 204 ]
+"values": [ 200, 201, 202, 203, 204, 199 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -806,7 +850,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.4 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -1011,6 +1055,14 @@ blend_point_3/pos = Vector2( 0, -1 )
 snap = Vector2( 0.01, 0.02 )
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id=95]
+animation = "ThornSpiral"
+
+[sub_resource type="AnimationNodeStateMachine" id=96]
+states/ThornSpiral/node = SubResource( 95 )
+states/ThornSpiral/position = Vector2( 843, 100 )
+start_node = "ThornSpiral"
+
 [sub_resource type="AnimationNodeAnimation" id=21]
 animation = "Walk Left"
 
@@ -1058,6 +1110,14 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=93]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=97]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=98]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=99]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=100]
+
 [sub_resource type="AnimationNodeStateMachine" id=27]
 states/AttackIdle/node = SubResource( 69 )
 states/AttackIdle/position = Vector2( 368, -22.3403 )
@@ -1068,14 +1128,18 @@ states/Damaged/position = Vector2( 142.839, 81 )
 states/Idle/node = SubResource( 20 )
 states/Idle/position = Vector2( 368, 81 )
 states/Roll/node = SubResource( 35 )
-states/Roll/position = Vector2( 368, 193.382 )
+states/Roll/position = Vector2( 243, 193.382 )
+states/ThornSpiral/node = SubResource( 96 )
+states/ThornSpiral/position = Vector2( 469.839, 193.382 )
 states/Walk/node = SubResource( 25 )
 states/Walk/position = Vector2( 564, 81 )
-transitions = [ "Idle", "Walk", SubResource( 26 ), "Idle", "Roll", SubResource( 38 ), "Walk", "Idle", SubResource( 41 ), "Roll", "Idle", SubResource( 42 ), "Idle", "AttackIdle", SubResource( 71 ), "AttackIdle", "Idle", SubResource( 72 ), "AttackWalk", "Walk", SubResource( 73 ), "Walk", "AttackWalk", SubResource( 74 ), "AttackIdle", "AttackWalk", SubResource( 79 ), "AttackWalk", "AttackIdle", SubResource( 80 ), "Idle", "Damaged", SubResource( 92 ), "Damaged", "Idle", SubResource( 93 ) ]
+transitions = [ "Idle", "Walk", SubResource( 26 ), "Idle", "Roll", SubResource( 38 ), "Walk", "Idle", SubResource( 41 ), "Roll", "Idle", SubResource( 42 ), "Idle", "AttackIdle", SubResource( 71 ), "AttackIdle", "Idle", SubResource( 72 ), "AttackWalk", "Walk", SubResource( 73 ), "Walk", "AttackWalk", SubResource( 74 ), "AttackIdle", "AttackWalk", SubResource( 79 ), "AttackWalk", "AttackIdle", SubResource( 80 ), "Idle", "Damaged", SubResource( 92 ), "Damaged", "Idle", SubResource( 93 ), "Idle", "ThornSpiral", SubResource( 97 ), "ThornSpiral", "Idle", SubResource( 98 ), "Walk", "ThornSpiral", SubResource( 99 ), "ThornSpiral", "Walk", SubResource( 100 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -330.161, -56.2432 )
+graph_offset = Vector2( -330.161, 17.2383 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=28]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=101]
 
 [sub_resource type="CapsuleShape2D" id=61]
 radius = 8.0
@@ -1154,6 +1218,7 @@ anims/ThornIdleUp = SubResource( 56 )
 anims/ThornLeft = SubResource( 57 )
 anims/ThornLeftIdle = SubResource( 58 )
 anims/ThornRight = SubResource( 59 )
+anims/ThornSpiral = SubResource( 94 )
 anims/ThornUp = SubResource( 60 )
 "anims/Walk Down" = SubResource( 11 )
 "anims/Walk Left" = SubResource( 12 )
@@ -1170,6 +1235,7 @@ parameters/AttackWalk/blend_position = Vector2( 0, 0 )
 parameters/Damaged/blend_position = Vector2( 0, 0 )
 parameters/Idle/blend_position = Vector2( 0, 0.619266 )
 parameters/Roll/blend_position = Vector2( 0, 0.7173 )
+parameters/ThornSpiral/playback = SubResource( 101 )
 parameters/Walk/blend_position = Vector2( 0.0047543, 0.594828 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
@@ -1180,7 +1246,7 @@ position = Vector2( 0, -11 )
 shape = SubResource( 61 )
 
 [node name="ThornSpawn" type="Position2D" parent="."]
-position = Vector2( 0, -4 )
+position = Vector2( 0, -15 )
 
 [node name="ThornShoot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )

@@ -1,8 +1,8 @@
 extends Node
 
-export var max_health = 18
+export var max_health = 12
 export var max_stamina = 5
-export var max_temp_health = 24
+export var max_temp_health = 18
 
 export(String) var status = "" setget set_status
 onready var health = max_health setget set_health

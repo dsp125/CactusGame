@@ -459,7 +459,7 @@ cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
 show_collision = true
 format = 1
 script = ExtResource( 1 )
-fill_percentage = 0.76
+fill_percentage = 0.86
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -492,16 +492,18 @@ smoothing_speed = 40.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HeartUI" parent="CanvasLayer" instance=ExtResource( 3 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 4.0
-margin_right = 320.0
-margin_bottom = 21.0
+margin_top = -25.0
+margin_right = 316.0
+margin_bottom = -8.0
 
 [node name="StaminaUI" parent="CanvasLayer" instance=ExtResource( 10 )]
+anchor_top = 1.0
 anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 4.0
-margin_top = 8.0
+margin_top = -16.0
 margin_right = 68.0
-margin_bottom = 24.0
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_ExplorationLevel_child_exiting_tree"]

@@ -4,7 +4,7 @@ extends Control
 export var total_health : int = 18
 export var max_health : int = 18 #regular + temp
 var max_temp_health : int = 24
-var max_red_hearts : int = 6
+var max_red_hearts : int = 4
 var hearts : int = 6  # This will represent the current number of hearts
 var health_per_heart = 3
 #var max_hearts : int = 6  # Max number of hearts when the health is at full value
@@ -65,5 +65,5 @@ func update_health_display():
 # Function to modify the health and refresh the display
 func modify_health(amount : int):
 	total_health = amount
-	print("modify health:", amount)
+	#print("modify health:", amount)
 	update_health_display()
