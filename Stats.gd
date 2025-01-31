@@ -16,7 +16,8 @@ signal stamina_changed(value)
 signal status_changed(value)
 
 func set_health(value):
-	health = value
+	health = clamp(value,0,max_health)
+	print(health)
 	emit_signal("health_changed",health)
 	if(health <= 0):
 		emit_signal("no_health")

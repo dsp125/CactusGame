@@ -13,16 +13,17 @@ onready var heartContainer = $HeartContainer
 export onready var REF_HEART = preload("res://UI/Heart.tscn")
 
 func set_hearts(value):
-	var healing = hearts < value
-	hearts = clamp(value,0,max_hearts)
-	var panels = heartContainer.get_children()
-	if(panels.size() > 0):
-		if healing:
-			var currentHeart = ceil((hearts-1)/4.0) - 1
-			panels[currentHeart].frame -= 1
-		else:
-			var currentHeart = ceil(hearts/4.0) - 1
-			panels[currentHeart].frame += 1
+	if hearts != value:
+		var healing = hearts < value
+		hearts = clamp(value,0,max_hearts)
+		var panels = heartContainer.get_children()
+		if(panels.size() > 0):
+			if healing:
+				var currentHeart = ceil((hearts-1)/4.0) - 1
+				panels[currentHeart].frame -= 1
+			else:
+				var currentHeart = ceil(hearts/4.0) - 1
+				panels[currentHeart].frame += 1
 
 func set_stamina(value):
 	stamina = clamp(value,0,max_stamina)

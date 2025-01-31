@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://Enemies/FootstepPatrol.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/PatrolController.tscn" type="PackedScene" id=2]
@@ -18,7 +18,7 @@ radius = 8.0
 height = 0.0
 
 [sub_resource type="CircleShape2D" id=74]
-radius = 71.007
+radius = 101.242
 
 [sub_resource type="Animation" id=86]
 resource_name = "Damage Down"
@@ -158,6 +158,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
 }
 
 [sub_resource type="Animation" id=78]
@@ -406,6 +420,14 @@ blend_point_3/node = SubResource( 112 )
 blend_point_3/pos = Vector2( 1, 0 )
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id=113]
+animation = "Death"
+
+[sub_resource type="AnimationNodeStateMachine" id=114]
+states/Death/node = SubResource( 113 )
+states/Death/position = Vector2( 747, 201 )
+start_node = "Death"
+
 [sub_resource type="AnimationNodeAnimation" id=91]
 animation = "Fly Left"
 
@@ -464,17 +486,26 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=102]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=117]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=118]
+
 [sub_resource type="AnimationNodeStateMachine" id=103]
 states/Damaged/node = SubResource( 90 )
 states/Damaged/position = Vector2( 569, 186 )
+states/Death/node = SubResource( 114 )
+states/Death/position = Vector2( 569, -46 )
 states/Fly/node = SubResource( 95 )
 states/Fly/position = Vector2( 471, 90 )
 states/Spit/node = SubResource( 96 )
 states/Spit/position = Vector2( 667, 90 )
-transitions = [ "Fly", "Spit", SubResource( 97 ), "Spit", "Fly", SubResource( 98 ), "Fly", "Damaged", SubResource( 99 ), "Damaged", "Fly", SubResource( 100 ), "Damaged", "Spit", SubResource( 101 ), "Spit", "Damaged", SubResource( 102 ) ]
+transitions = [ "Fly", "Spit", SubResource( 97 ), "Spit", "Fly", SubResource( 98 ), "Fly", "Damaged", SubResource( 99 ), "Damaged", "Fly", SubResource( 100 ), "Damaged", "Spit", SubResource( 101 ), "Spit", "Damaged", SubResource( 102 ), "Fly", "Death", SubResource( 117 ), "Spit", "Death", SubResource( 118 ) ]
 start_node = "Fly"
+graph_offset = Vector2( 0, -169.302 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=104]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=116]
 
 [node name="Fly" type="KinematicBody2D"]
 collision_layer = 32
@@ -504,10 +535,9 @@ shape = SubResource( 51 )
 max_health = 3
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 4 )]
-visible = false
 collision_mask = 64
 monitorable = false
-radius = 120
+radius = 300
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 position = Vector2( 0, -11 )
@@ -545,6 +575,7 @@ tree_root = SubResource( 103 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 104 )
 parameters/Damaged/blend_position = Vector2( 0, 0 )
+parameters/Death/playback = SubResource( 116 )
 parameters/Fly/blend_position = Vector2( 0.010293, 0.491379 )
 parameters/Spit/blend_position = Vector2( 0, 0 )
 
