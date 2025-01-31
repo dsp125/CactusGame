@@ -10,6 +10,7 @@ enum {
 	IDLE,
 	PATROL,
 	CHASE,
+	DAMAGED,
 	INSPECT,
 	RETURN
 }
@@ -30,7 +31,7 @@ onready var patrol_controller = $PatrolController
 onready var origin = global_position
 onready var spitSpawn = $SpitSpawn
 
-export var REF_SPIT = preload("res://Hitboxes/Projectiles/Fish.tscn")
+export var REF_SPIT = preload("res://Hitboxes/Projectiles/Spit.tscn")
 
 func _ready():
 	animationTree.active = true
@@ -83,6 +84,10 @@ func _physics_process(delta):
 			if player == null:
 				velocity = Vector2.ZERO
 				state = IDLE
+				
+		DAMAGED:
+			damage_state()
+			
 		INSPECT:
 			#print("INSPECTING")
 			play_patrol_footsteps()
@@ -122,7 +127,7 @@ func _on_Hurtbox_area_entered(area:Area2D):
 	stats.health -= 1
 	knockback = area.knockback_vector * KNOCKBACK_SCALER
 	inspect_target = Vector2(-area.knockback_vector.x,-area.knockback_vector.y)
-	state = INSPECT
+	state = DAMAGED
 
 func inspect_for_player(delta):
 	velocity = velocity.move_toward(inspect_target * MAX_SPEED, ACCELERATION * delta)
@@ -151,3 +156,10 @@ func shoot_spit():
 		get_tree().current_scene.add_child(spit)
 		spit.global_position = spitSpawn.global_position
 		spit.rotation = spit.global_position.direction_to(player.global_position).angle()
+
+func damage_state():
+	animationTree.set("parameters/Damaged/blend_position", inspect_target)
+	animationState.travel("Damaged")
+
+func end_damage_state():
+	state = IDLE

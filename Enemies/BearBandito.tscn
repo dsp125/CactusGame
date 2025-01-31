@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://Sprites/bear bandito-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Hurtboxes/Hurtbox.tscn" type="PackedScene" id=2]
@@ -31,6 +31,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "end_damage_state"
+} ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -328,6 +342,14 @@ blend_point_3/node = SubResource( 66 )
 blend_point_3/pos = Vector2( 1, 0 )
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id=71]
+animation = "Damaged"
+
+[sub_resource type="AnimationNodeStateMachine" id=72]
+states/Damaged/node = SubResource( 71 )
+states/Damaged/position = Vector2( 653, 185 )
+start_node = "Damaged"
+
 [sub_resource type="AnimationNodeAnimation" id=27]
 animation = "IdleDown"
 
@@ -373,18 +395,30 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=49]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=73]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=74]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=75]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=76]
+
 [sub_resource type="AnimationNodeStateMachine" id=8]
 states/Attack/node = SubResource( 45 )
 states/Attack/position = Vector2( 491.995, 175.72 )
+states/Damaged/node = SubResource( 72 )
+states/Damaged/position = Vector2( 482.892, 275.512 )
 states/Idle/node = SubResource( 28 )
 states/Idle/position = Vector2( 644, 59 )
 states/Patrol/node = SubResource( 18 )
 states/Patrol/position = Vector2( 352, 59 )
-transitions = [ "Patrol", "Idle", SubResource( 29 ), "Idle", "Patrol", SubResource( 30 ), "Patrol", "Attack", SubResource( 46 ), "Attack", "Patrol", SubResource( 47 ), "Attack", "Idle", SubResource( 48 ), "Idle", "Attack", SubResource( 49 ) ]
+transitions = [ "Patrol", "Idle", SubResource( 29 ), "Idle", "Patrol", SubResource( 30 ), "Patrol", "Attack", SubResource( 46 ), "Attack", "Patrol", SubResource( 47 ), "Attack", "Idle", SubResource( 48 ), "Idle", "Attack", SubResource( 49 ), "Patrol", "Damaged", SubResource( 73 ), "Attack", "Damaged", SubResource( 74 ), "Idle", "Damaged", SubResource( 75 ), "Damaged", "Patrol", SubResource( 76 ) ]
 start_node = "Idle"
 graph_offset = Vector2( -226.108, 32.512 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=9]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=77]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=33]
 
@@ -432,6 +466,7 @@ tree_root = SubResource( 8 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 9 )
 parameters/Attack/blend_position = Vector2( 0.299525, -0.0603448 )
+parameters/Damaged/playback = SubResource( 77 )
 parameters/Idle/playback = SubResource( 33 )
 parameters/Patrol/blend_position = Vector2( 0.277338, -0.734483 )
 

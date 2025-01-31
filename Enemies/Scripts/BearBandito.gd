@@ -10,6 +10,7 @@ enum {
 	IDLE,
 	PATROL,
 	CHASE,
+	DAMAGE,
 	INSPECT,
 	RETURN
 }
@@ -83,6 +84,9 @@ func _physics_process(delta):
 			if player == null:
 				velocity = Vector2.ZERO
 				state = IDLE
+		DAMAGE:
+			damage_state()
+			
 		INSPECT:
 			#print("INSPECTING")
 			play_patrol_footsteps()
@@ -122,7 +126,7 @@ func _on_Hurtbox_area_entered(area:Area2D):
 	stats.health -= 1
 	knockback = area.knockback_vector * KNOCKBACK_SCALER
 	inspect_target = Vector2(-area.knockback_vector.x,-area.knockback_vector.y)
-	state = INSPECT
+	state = DAMAGE
 
 func inspect_for_player(delta):
 	velocity = velocity.move_toward(inspect_target * MAX_SPEED, ACCELERATION * delta)
@@ -151,3 +155,11 @@ func throw_object():
 		get_tree().current_scene.add_child(fish)
 		fish.global_position = throwSpawn.global_position
 		fish.rotation = fish.global_position.direction_to(player.global_position).angle()
+
+func damage_state():
+	velocity = Vector2.ZERO
+
+	animationState.travel("Damaged")
+	
+func end_damage_state():
+	state = INSPECT
