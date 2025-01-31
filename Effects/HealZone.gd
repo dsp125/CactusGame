@@ -12,6 +12,7 @@ func _on_HealZone_body_entered(body):
 	player = body
 	player.healing_timer.start(time_per_tick)
 
+
 func _on_HealZone_body_exited(body):
 	player.healing = false
 	player.healing_timer.stop()

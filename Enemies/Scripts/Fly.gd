@@ -21,6 +21,9 @@ var state = IDLE
 var inspect_duration: float = 5.0
 var inspect_timer: float = 0.0
 var inspect_target = Vector2.ZERO
+var path_amplitude = 1
+var path_frequency = 10
+var time = 0.0
 
 onready var stats = $Stats
 onready var player_detection_zone = $PlayerDetectionZone
@@ -70,9 +73,15 @@ func _physics_process(delta):
 		CHASE:
 			#print("CHASING")
 			play_patrol_footsteps()
+			time += delta
 			var player = player_detection_zone.player
 			if player != null:
 				var direction = global_position.direction_to(player.global_position)
+				#OSCILATING PATH LOGIC
+				#direction.y = cos(time*path_frequency)*path_amplitude
+				#direction = direction.normalized()
+				###Would need added logic to flip to sin and direction.x on up or down movement
+				########
 				if global_position.distance_to(player.global_position) >= 80:
 					animationTree.set("parameters/Fly/blend_position", direction)
 					animationState.travel("Fly")
@@ -82,6 +91,7 @@ func _physics_process(delta):
 					animationTree.set("parameters/Spit/blend_position", direction)
 					animationState.travel("Spit")
 			if player == null:
+				time = 0.0
 				velocity = Vector2.ZERO
 				state = IDLE
 				
@@ -137,8 +147,6 @@ func return_to_origin(delta):
 	velocity = velocity.move_toward((origin-global_position).normalized() * MAX_SPEED, ACCELERATION * delta)
 	seek_player()
 
-func _on_Stats_no_health():
-	queue_free() # Replace with function body.
 
 func play_patrol_footsteps():
 	if not patrol_audio.playing:
@@ -158,8 +166,11 @@ func shoot_spit():
 		spit.rotation = spit.global_position.direction_to(player.global_position).angle()
 
 func damage_state():
-	animationTree.set("parameters/Damaged/blend_position", inspect_target)
-	animationState.travel("Damaged")
+	if(stats.health > 0):
+		animationTree.set("parameters/Damaged/blend_position", inspect_target)
+		animationState.travel("Damaged")
+	else:
+		animationState.travel("Death")
 
 func end_damage_state():
 	state = IDLE
