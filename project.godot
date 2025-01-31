@@ -106,6 +106,7 @@ ui_attack={
 2d_physics/layer_5="EnemyHitbox"
 2d_physics/layer_6="Enemies"
 2d_physics/layer_7="Player"
+2d_physics/layer_8="HealBox"
 
 [physics]
 
