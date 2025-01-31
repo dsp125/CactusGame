@@ -26,6 +26,7 @@ onready var thornSpawn = $ThornSpawn
 onready var reloadTimer = $ReloadTimer
 onready var reload_bar = $ReloadBar
 onready var hitbox = $Hitbox
+onready var healingTimer = $HealingTimer
 
 #Audio Controllers
 onready var thornAudio = $ThornShoot
@@ -221,3 +222,7 @@ func end_damage_state():
 	#hurtbox.set_invincible(false)
 	state = PlayerStates.MOVE
 	animationState.travel("Idle")
+
+func _on_HealingTimer_timeout():
+	print("HEALING")
+	stats.health += 1 # Replace with function body.

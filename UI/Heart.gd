@@ -1,15 +1,8 @@
 extends Panel
 
 onready var sprite = $Heart
-export onready var empty = false
+var frame = 0 setget set_frame
 
-func update_heart(whole):
-	if whole == true:
-		sprite.frame = 0
-	else:
-		sprite.frame += 1
-		if(sprite.frame == 4):
-			empty = true
-
-func is_empty():
-	return empty
+func set_frame(value):
+	frame = clamp(value, 0, 4)
+	sprite.frame = frame

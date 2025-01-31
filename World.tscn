@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/desert_test.png" type="Texture" id=2]
@@ -556,6 +556,8 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 18/shapes = [  ]
 18/z_index = 0
 
+[sub_resource type="CircleShape2D" id=28]
+
 [node name="World" type="Node2D"]
 position = Vector2( 3, 1 )
 
@@ -605,6 +607,12 @@ smoothing_speed = 40.0
 [node name="Fly" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 35, 157 )
 
+[node name="HealZone" parent="." instance=ExtResource( 10 )]
+
+[node name="CollisionShape2D" parent="HealZone" index="0"]
+scale = Vector2( 5, 5 )
+shape = SubResource( 28 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 6 )]
@@ -613,5 +621,6 @@ margin_top = 2.0
 margin_right = 45.0
 margin_bottom = 42.0
 
-[node name="HealZone" parent="." instance=ExtResource( 10 )]
-position = Vector2( 44, 0 )
+[connection signal="body_shape_exited" from="HealZone" to="HealZone" method="_on_HealZone_body_shape_exited"]
+
+[editable path="HealZone"]
