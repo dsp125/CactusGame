@@ -14,6 +14,7 @@ var max_ammo = 10
 var ammo = max_ammo
 var reloading = false
 var reload_time = 1.5
+var healing = false
 
 #Scenes instantiated via player script
 export var REF_THORN = preload("res://Hitboxes/Projectiles/Thorn.tscn")
@@ -24,15 +25,15 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var thornSpawn = $ThornSpawn
 onready var reloadTimer = $ReloadTimer
+onready var healing_timer = $HealingTimer
 onready var reload_bar = $ReloadBar
 onready var hitbox = $Hitbox
-onready var healingTimer = $HealingTimer
+onready var healing_particles = $HealingParticles
 
 #Audio Controllers
 onready var thornAudio = $ThornShoot
 onready var footstep_audio = $Footsteps
 onready var roll_audio = $PlayerRoll
-
 
 #Player Collisions
 onready var hurtbox = $Hurtbox
@@ -66,7 +67,7 @@ func _process(delta):
 			damaged_state(delta)
 	
 func move_state(delta):
-	stats.stamina += delta*2
+	stats.stamina += delta*20
 	var input_vector = Vector2.ZERO
 	direction_vector = get_global_mouse_position() - position
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -91,8 +92,8 @@ func move_state(delta):
 	move()
 	
 	if Input.is_action_just_pressed("ui_roll"):
-		if(stats.stamina >= 2):
-			stats.stamina -= 2
+		if(stats.stamina >= 25):
+			stats.stamina -= 25
 			print(stats.stamina)
 			hurtbox.set_invincible(true)
 			animationTree.set("parameters/Roll/blend_position", input_vector)
@@ -224,5 +225,4 @@ func end_damage_state():
 	animationState.travel("Idle")
 
 func _on_HealingTimer_timeout():
-	print("HEALING")
-	stats.health += 1 # Replace with function body.
+	stats.health += 1
