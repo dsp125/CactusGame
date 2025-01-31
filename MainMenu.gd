@@ -21,7 +21,7 @@ func _ready():
 
 func _on_Start_pressed():
 	play_pressed_audio()
-	get_tree().change_scene("res://World.tscn")
+	get_tree().change_scene("res://ExplorationLevel.tscn")
 	
 func _on_Controls_pressed():
 	play_pressed_audio()

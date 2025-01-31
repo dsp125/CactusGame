@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fish.png-6cc5b3fb6dd6f470b50c605c07a0848c.stex"
+path="res://.import/thorn.png-749e67d36da60ea9fed2d9255bef826a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/fish.png"
-dest_files=[ "res://.import/fish.png-6cc5b3fb6dd6f470b50c605c07a0848c.stex" ]
+source_file="res://Sprites/Projectiles/thorn.png"
+dest_files=[ "res://.import/thorn.png-749e67d36da60ea9fed2d9255bef826a.stex" ]
 
 [params]
 
