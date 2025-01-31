@@ -11,6 +11,8 @@ onready var proc_gen_map_base = $ProcGenDesert
 onready var enemy_spawner = $YSort/EnemySpawner
 onready var playable_space = proc_gen_map_base.playable_tiles
 
+var bears : Array = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -20,9 +22,13 @@ func _ready():
 	print("height: ", proc_gen_map_base.MAP_HEIGHT)
 	#print("level:  ", proc_gen_map_base.map_grid)
 	print("playable: ", playable_space)
-	enemy_spawner.spawn_bears(10,playable_space,SEED_VALUE)
+	var bears = enemy_spawner.spawn_bears(10,playable_space,SEED_VALUE)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_ExplorationLevel_child_exiting_tree(node):
+	pass # Replace with function body.
