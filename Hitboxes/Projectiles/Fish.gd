@@ -18,12 +18,10 @@ func destroy():
 	queue_free()
 
 func _on_Hitbox_area_entered(area):
-	print("Target Hit:", area.get_parent())
 	destroy()
 
 func _on_Hitbox_body_entered(_body):
 	destroy() # Replace with function body.
 
 func _on_VisibilityNotifier2D_screen_exited():
-	print("Leaving Screen")
 	destroy()

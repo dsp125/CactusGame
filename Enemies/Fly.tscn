@@ -1,0 +1,478 @@
+[gd_scene load_steps=46 format=2]
+
+[ext_resource path="res://Enemies/FootstepPatrol.gd" type="Script" id=1]
+[ext_resource path="res://Enemies/PatrolController.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Hurtboxes/Hurtbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Stats.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Audio/SFX/footstep_chase.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Sprites/Enemies/gnat-sheet.png" type="Texture" id=7]
+[ext_resource path="res://Enemies/Scripts/Fly.gd" type="Script" id=8]
+
+[sub_resource type="CapsuleShape2D" id=50]
+radius = 5.0
+height = 0.0
+
+[sub_resource type="CapsuleShape2D" id=51]
+radius = 8.0
+height = 0.0
+
+[sub_resource type="CircleShape2D" id=74]
+radius = 71.007
+
+[sub_resource type="Animation" id=86]
+resource_name = "Damage Down"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 121, 122, 123, 124, 125, 126 ]
+}
+
+[sub_resource type="Animation" id=85]
+resource_name = "Damage Left"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 99, 100, 101, 102, 103, 104 ]
+}
+
+[sub_resource type="Animation" id=87]
+resource_name = "Damage Right"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 110, 111, 112, 113, 114, 115 ]
+}
+
+[sub_resource type="Animation" id=82]
+resource_name = "Damage Up"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 88, 89, 90, 91, 92, 93 ]
+}
+
+[sub_resource type="Animation" id=88]
+resource_name = "Death"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143 ]
+}
+
+[sub_resource type="Animation" id=78]
+resource_name = "Fly Down"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 33, 34, 35, 36, 37, 38 ]
+}
+
+[sub_resource type="Animation" id=77]
+resource_name = "Fly Left"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 11, 12, 13, 14, 15, 16 ]
+}
+
+[sub_resource type="Animation" id=79]
+resource_name = "Fly Right"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 22, 23, 24, 25, 26, 27 ]
+}
+
+[sub_resource type="Animation" id=75]
+resource_name = "Fly Up"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=76]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=89]
+resource_name = "Spawn"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 164 ]
+}
+
+[sub_resource type="Animation" id=83]
+resource_name = "Spit Down"
+length = 1.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_spit"
+} ]
+}
+
+[sub_resource type="Animation" id=80]
+resource_name = "Spit Left"
+length = 1.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_spit"
+} ]
+}
+
+[sub_resource type="Animation" id=84]
+resource_name = "Spit Right"
+length = 1.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_spit"
+} ]
+}
+
+[sub_resource type="Animation" id=81]
+resource_name = "Spit Up"
+length = 1.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_spit"
+} ]
+}
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=90]
+
+[sub_resource type="AnimationNodeAnimation" id=91]
+animation = "Fly Left"
+
+[sub_resource type="AnimationNodeAnimation" id=92]
+animation = "Fly Down"
+
+[sub_resource type="AnimationNodeAnimation" id=93]
+animation = "Fly Up"
+
+[sub_resource type="AnimationNodeAnimation" id=94]
+animation = "Fly Right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=95]
+blend_point_0/node = SubResource( 91 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 92 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 93 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 94 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=105]
+animation = "Spit Left"
+
+[sub_resource type="AnimationNodeAnimation" id=106]
+animation = "Spit Up"
+
+[sub_resource type="AnimationNodeAnimation" id=107]
+animation = "Spit Right"
+
+[sub_resource type="AnimationNodeAnimation" id=108]
+animation = "Spit Down"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=96]
+blend_point_0/node = SubResource( 105 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 106 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 107 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 108 )
+blend_point_3/pos = Vector2( 0, 1 )
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=97]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=98]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=99]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=100]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=101]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=102]
+
+[sub_resource type="AnimationNodeStateMachine" id=103]
+states/Damage/node = SubResource( 90 )
+states/Damage/position = Vector2( 569, 186 )
+states/Fly/node = SubResource( 95 )
+states/Fly/position = Vector2( 471, 90 )
+states/Spit/node = SubResource( 96 )
+states/Spit/position = Vector2( 667, 90 )
+transitions = [ "Fly", "Spit", SubResource( 97 ), "Spit", "Fly", SubResource( 98 ), "Fly", "Damage", SubResource( 99 ), "Damage", "Fly", SubResource( 100 ), "Damage", "Spit", SubResource( 101 ), "Spit", "Damage", SubResource( 102 ) ]
+start_node = "Fly"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=104]
+
+[node name="Fly" type="KinematicBody2D"]
+collision_layer = 32
+script = ExtResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 2 )
+texture = ExtResource( 7 )
+offset = Vector2( 0, -11 )
+hframes = 11
+vframes = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 50 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 3 )]
+visible = false
+collision_layer = 4
+collision_mask = 9
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 0, -9 )
+shape = SubResource( 51 )
+
+[node name="Stats" parent="." instance=ExtResource( 5 )]
+max_health = 5
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 4 )]
+visible = false
+collision_mask = 64
+monitorable = false
+radius = 120
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+position = Vector2( 0, -11 )
+shape = SubResource( 74 )
+
+[node name="PatrolController" parent="." instance=ExtResource( 2 )]
+
+[node name="FootstepPatrol" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+pitch_scale = 0.83
+script = ExtResource( 1 )
+
+[node name="SpitSpawn" type="Position2D" parent="."]
+position = Vector2( 0, -7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/Damage Down" = SubResource( 86 )
+"anims/Damage Left" = SubResource( 85 )
+"anims/Damage Right" = SubResource( 87 )
+"anims/Damage Up" = SubResource( 82 )
+anims/Death = SubResource( 88 )
+"anims/Fly Down" = SubResource( 78 )
+"anims/Fly Left" = SubResource( 77 )
+"anims/Fly Right" = SubResource( 79 )
+"anims/Fly Up" = SubResource( 75 )
+anims/RESET = SubResource( 76 )
+anims/Spawn = SubResource( 89 )
+"anims/Spit Down" = SubResource( 83 )
+"anims/Spit Left" = SubResource( 80 )
+"anims/Spit Right" = SubResource( 84 )
+"anims/Spit Up" = SubResource( 81 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 103 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 104 )
+parameters/Damage/blend_position = Vector2( 0, 0 )
+parameters/Fly/blend_position = Vector2( 0.010293, 0.491379 )
+parameters/Spit/blend_position = Vector2( 0, 0 )
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+
+[editable path="Hurtbox"]
+[editable path="PlayerDetectionZone"]

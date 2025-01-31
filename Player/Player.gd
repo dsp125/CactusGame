@@ -25,6 +25,7 @@ onready var animationState = animationTree.get("parameters/playback")
 onready var thornSpawn = $ThornSpawn
 onready var reloadTimer = $ReloadTimer
 onready var reload_bar = $ReloadBar
+onready var hitbox = $Hitbox
 
 #Audio Controllers
 onready var thornAudio = $ThornShoot
@@ -38,7 +39,8 @@ onready var hurtbox = $Hurtbox
 enum PlayerStates{
 	MOVE,
 	ROLL,
-	SHOOT
+	SHOOT,
+	DAMAGED
 }
 
 var state = PlayerStates.MOVE
@@ -58,13 +60,18 @@ func _process(delta):
 		
 		PlayerStates.SHOOT:
 			shoot_state(delta)
+			
+		PlayerStates.DAMAGED:
+			damaged_state(delta)
 	
 func move_state(delta):
+	stats.stamina += delta*2
 	var input_vector = Vector2.ZERO
 	direction_vector = get_global_mouse_position() - position
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
+	hitbox.knockback_vector = input_vector
 		
 	if input_vector != Vector2.ZERO:
 		play_footsteps()
@@ -83,8 +90,12 @@ func move_state(delta):
 	move()
 	
 	if Input.is_action_just_pressed("ui_roll"):
-		animationTree.set("parameters/Roll/blend_position", input_vector)
-		state = PlayerStates.ROLL
+		if(stats.stamina >= 2):
+			stats.stamina -= 2
+			print(stats.stamina)
+			hurtbox.set_invincible(true)
+			animationTree.set("parameters/Roll/blend_position", input_vector)
+			state = PlayerStates.ROLL
 	
 	if Input.is_action_pressed("ui_attack"):
 		if input_vector != Vector2.ZERO:
@@ -97,14 +108,13 @@ func move_state(delta):
 func roll_state(_delta):
 	stop_footsteps()
 	play_roll_audio()
-
-	hurtbox.start_invincibility(0.6)
 	velocity = prev_vector * ROLL_SPEED
 	animationState.travel("Roll")
 	move()
 
 func roll_animation_finished():
 	stop_roll_audio()
+	hurtbox.set_invincible(false)
 	state = PlayerStates.MOVE
 
 
@@ -165,8 +175,9 @@ func move():
 
 # TAKE DAMAGE
 func _on_Hurtbox_area_entered(area):
-	print("Taking Damage")
 	stats.health -= 1
+	hurtbox.start_invincibility(1.5)
+	state = PlayerStates.DAMAGED
 	
 func play_footsteps():
 	if not footstep_audio.playing:
@@ -184,9 +195,6 @@ func stop_roll_audio():
 	if roll_audio.playing:
 		roll_audio.stop()
 
-func invulnerable():
-	hurtbox.set_invincible(true)
-
 func reload(duration):
 	reload_bar.set_frame(0)
 	reload_bar.set_visible(true)
@@ -202,3 +210,14 @@ func _on_ReloadTimer_timeout():
 	reloadTimer.stop()
 	ammo = max_ammo
 	reloading = false
+
+func damaged_state(_delta):
+	#hurtbox.set_invincible(true)
+	direction_vector = get_global_mouse_position() - position
+	animationTree.set("parameters/Damaged/blend_position", direction_vector)
+	animationState.travel("Damaged")
+
+func end_damage_state():
+	#hurtbox.set_invincible(false)
+	state = PlayerStates.MOVE
+	animationState.travel("Idle")

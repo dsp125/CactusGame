@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Sprites/Indicators/red_hearts.png" type="Texture" id=1]
+[ext_resource path="res://UI/Heart.gd" type="Script" id=2]
+
+[node name="Heart" type="Panel"]
+margin_right = 16.0
+margin_bottom = 16.0
+script = ExtResource( 2 )
+
+[node name="Heart" type="Sprite" parent="."]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+hframes = 2
+vframes = 2

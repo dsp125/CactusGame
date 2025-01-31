@@ -305,26 +305,26 @@ tracks/0/keys = {
 "values": [ 24, 25, 26, 27, 28, 29 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=41]
+[sub_resource type="AnimationNodeAnimation" id=63]
 animation = "Throw Left"
 
-[sub_resource type="AnimationNodeAnimation" id=42]
+[sub_resource type="AnimationNodeAnimation" id=64]
 animation = "Throw Down"
 
-[sub_resource type="AnimationNodeAnimation" id=43]
+[sub_resource type="AnimationNodeAnimation" id=65]
 animation = "Throw Up"
 
-[sub_resource type="AnimationNodeAnimation" id=44]
+[sub_resource type="AnimationNodeAnimation" id=66]
 animation = "Throw Right"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id=45]
-blend_point_0/node = SubResource( 41 )
+blend_point_0/node = SubResource( 63 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 42 )
+blend_point_1/node = SubResource( 64 )
 blend_point_1/pos = Vector2( 0, 1 )
-blend_point_2/node = SubResource( 43 )
+blend_point_2/node = SubResource( 65 )
 blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 44 )
+blend_point_3/node = SubResource( 66 )
 blend_point_3/pos = Vector2( 1, 0 )
 blend_mode = 1
 
@@ -336,26 +336,26 @@ states/IdleDown/node = SubResource( 27 )
 states/IdleDown/position = Vector2( 625, 115 )
 start_node = "IdleDown"
 
-[sub_resource type="AnimationNodeAnimation" id=34]
+[sub_resource type="AnimationNodeAnimation" id=67]
 animation = "Walk Left"
 
-[sub_resource type="AnimationNodeAnimation" id=35]
+[sub_resource type="AnimationNodeAnimation" id=68]
 animation = "Walk Right"
 
-[sub_resource type="AnimationNodeAnimation" id=36]
+[sub_resource type="AnimationNodeAnimation" id=69]
 animation = "Walk Up"
 
-[sub_resource type="AnimationNodeAnimation" id=37]
+[sub_resource type="AnimationNodeAnimation" id=70]
 animation = "Walk Down"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id=18]
-blend_point_0/node = SubResource( 34 )
+blend_point_0/node = SubResource( 67 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 35 )
+blend_point_1/node = SubResource( 68 )
 blend_point_1/pos = Vector2( 1, 0 )
-blend_point_2/node = SubResource( 36 )
+blend_point_2/node = SubResource( 69 )
 blend_point_2/pos = Vector2( 0, -1.2 )
-blend_point_3/node = SubResource( 37 )
+blend_point_3/node = SubResource( 70 )
 blend_point_3/pos = Vector2( 0, 1.2 )
 min_space = Vector2( -1, -1.2 )
 max_space = Vector2( 1, 1.2 )
@@ -437,7 +437,6 @@ parameters/Patrol/blend_position = Vector2( 0.277338, -0.734483 )
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
 max_health = 5
-max_stamina = 5
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
 collision_mask = 64
@@ -456,7 +455,7 @@ pitch_scale = 0.83
 script = ExtResource( 8 )
 
 [node name="ThrowSpawn" type="Position2D" parent="."]
-position = Vector2( 8, -8 )
+position = Vector2( 3, -1 )
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]

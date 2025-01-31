@@ -28,9 +28,9 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var patrol_controller = $PatrolController
 onready var origin = global_position
-onready var throwSpawn = $ThrowSpawn
+onready var spitSpawn = $SpitSpawn
 
-export var REF_FISH = preload("res://Hitboxes/Projectiles/Fish.tscn")
+export var REF_SPIT = preload("res://Hitboxes/Projectiles/Fish.tscn")
 
 func _ready():
 	animationTree.active = true
@@ -44,7 +44,7 @@ func _physics_process(delta):
 	match state:
 		IDLE:
 			stop_patrol_footsteps()
-			animationState.travel("Idle")
+			animationState.travel("Fly")
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			seek_player()
 			if patrol_controller.get_time_left() == 0:
@@ -58,8 +58,8 @@ func _physics_process(delta):
 				patrol_controller.start_patrol_timer(rand_range(1,3))
 			
 			var direction = global_position.direction_to(patrol_controller.target_position)
-			animationTree.set("parameters/Patrol/blend_position", direction)
-			animationState.travel("Patrol")
+			animationTree.set("parameters/Fly/blend_position", direction)
+			animationState.travel("Fly")
 			velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 			
 			if global_position.distance_to(patrol_controller.target_position) <= MAX_SPEED * delta:
@@ -73,13 +73,13 @@ func _physics_process(delta):
 			if player != null:
 				var direction = global_position.direction_to(player.global_position)
 				if global_position.distance_to(player.global_position) >= 80:
-					animationTree.set("parameters/Patrol/blend_position", direction)
-					animationState.travel("Patrol")
+					animationTree.set("parameters/Fly/blend_position", direction)
+					animationState.travel("Fly")
 					velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 				else:
 					velocity = Vector2.ZERO
-					animationTree.set("parameters/Attack/blend_position", direction)
-					animationState.travel("Attack")
+					animationTree.set("parameters/Spit/blend_position", direction)
+					animationState.travel("Spit")
 			if player == null:
 				velocity = Vector2.ZERO
 				state = IDLE
@@ -90,8 +90,8 @@ func _physics_process(delta):
 			if inspect_timer <= inspect_duration:
 				inspect_timer += delta
 				inspect_for_player(delta)
-				animationTree.set("parameters/Patrol/blend_position", inspect_target)
-				animationState.travel("Patrol")
+				animationTree.set("parameters/Fly/blend_position", inspect_target)
+				animationState.travel("Fly")
 			else:
 				inspect_timer = 0.0
 				state = RETURN
@@ -100,11 +100,11 @@ func _physics_process(delta):
 			play_patrol_footsteps()
 			seek_player()
 			if global_position.distance_to(origin) < 0.25:
-				animationState.travel("Idle")
+				animationState.travel("Fly")
 				state = IDLE ## set to patrol when implemented
 			else:
-				animationTree.set("parameters/Patrol/blend_position", origin)
-				animationState.travel("Patrol")
+				animationTree.set("parameters/Fly/blend_position", origin)
+				animationState.travel("Fly")
 				return_to_origin(delta)
 			
 
@@ -143,11 +143,11 @@ func stop_patrol_footsteps():
 	if patrol_audio.playing:
 		patrol_audio.stop()
 
-func throw_object():
+func shoot_spit():
 	#throwAudio.play()
-	if REF_FISH:
-		var fish = REF_FISH.instance()
+	if REF_SPIT:
+		var spit = REF_SPIT.instance()
 		var player = player_detection_zone.player
-		get_tree().current_scene.add_child(fish)
-		fish.global_position = throwSpawn.global_position
-		fish.rotation = fish.global_position.direction_to(player.global_position).angle()
+		get_tree().current_scene.add_child(spit)
+		spit.global_position = spitSpawn.global_position
+		spit.rotation = spit.global_position.direction_to(player.global_position).angle()
