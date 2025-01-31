@@ -483,10 +483,12 @@ current = true
 smoothing_enabled = true
 smoothing_speed = 40.0
 
-[node name="HealthUI" parent="YSort/Player/Camera2D" instance=ExtResource( 5 )]
-margin_left = -155.0
-margin_top = -89.0
-margin_right = -115.0
-margin_bottom = -49.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 5 )]
+margin_left = 5.0
+margin_top = 1.0
+margin_right = 42.0
+margin_bottom = 41.0
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_ExplorationLevel_child_exiting_tree"]

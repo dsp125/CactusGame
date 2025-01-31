@@ -175,7 +175,7 @@ func move():
 
 # TAKE DAMAGE
 func _on_Hurtbox_area_entered(area):
-	stats.health -= 1
+	stats.health -= area.damage
 	hurtbox.start_invincibility(1.5)
 	state = PlayerStates.DAMAGED
 	

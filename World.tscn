@@ -601,6 +601,9 @@ current = true
 smoothing_enabled = true
 smoothing_speed = 40.0
 
+[node name="Fly" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 35, 157 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 6 )]
@@ -608,6 +611,3 @@ margin_left = 5.0
 margin_top = 2.0
 margin_right = 45.0
 margin_bottom = 42.0
-
-[node name="Fly" parent="." instance=ExtResource( 9 )]
-position = Vector2( 35, 157 )
