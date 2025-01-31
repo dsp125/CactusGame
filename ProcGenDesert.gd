@@ -3,7 +3,7 @@ extends TileMap
 # Map size (30x40)
 const MAP_WIDTH = 30
 const MAP_HEIGHT = 40
-var fill_percentage = 0.97
+export var fill_percentage = 0.97
 
 # Tile indices (assuming 0 = wall and 1 = path)
 const WALL_TILE = 1
@@ -44,6 +44,7 @@ func run_generation(seed_number:int):
 	generate_random_walk_with_target_fill()
 	# Optional: Ensure connectivity (flood fill, etc.)
 	remove_1x1_holes()
+	ensure_connectivity_using_prims()
 	# Draw the generated map to the TileMap
 	#print(playable_tiles)
 	draw_map()
@@ -53,9 +54,9 @@ func run_generation(seed_number:int):
 # Initialize map with walls
 func initialize_map():
 	map_grid = []
-	for y in range(MAP_HEIGHT):
+	for y in range(-12,MAP_HEIGHT+12):
 		var row = []
-		for x in range(MAP_WIDTH):
+		for x in range(-12,MAP_WIDTH+12):
 			row.append(WALL_TILE)  # Initially, all tiles are walls
 		map_grid.append(row)
 
@@ -175,7 +176,7 @@ func flood_fill(position : Vector2, visited : Array):
 
 # Draw the map to the TileMap
 func draw_map():
-	for y in range(MAP_HEIGHT):
-		for x in range(MAP_WIDTH):
+	for y in range(-12,MAP_HEIGHT+12):
+		for x in range(-12,MAP_WIDTH+12):
 			set_cell(x, y, map_grid[y][x])  # Set each tile on the TileMap based on map_grid
 

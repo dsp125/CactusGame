@@ -38,6 +38,7 @@ func _ready():
 
 #Audio Controllers
 onready var patrol_audio = $FootstepPatrol
+onready var throw_fish_audio = $ThrowFish
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO,200 * delta)
@@ -147,8 +148,11 @@ func stop_patrol_footsteps():
 	if patrol_audio.playing:
 		patrol_audio.stop()
 
+func play_throw_fish_audio():
+	throw_fish_audio.play()
+
 func throw_object():
-	#throwAudio.play()
+	play_throw_fish_audio()
 	if REF_FISH:
 		var fish = REF_FISH.instance()
 		var player = player_detection_zone.player

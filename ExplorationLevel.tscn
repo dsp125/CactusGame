@@ -1,13 +1,14 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://ProcGenDesert.gd" type="Script" id=1]
 [ext_resource path="res://SunspotSpawner.gd" type="Script" id=2]
+[ext_resource path="res://UI/HeartUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Sprites/Particles/healing.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Prototype_DesertTiles.png" type="Texture" id=7]
 [ext_resource path="res://EnemySpawner.gd" type="Script" id=8]
 [ext_resource path="res://ExplorationLevel.gd" type="Script" id=9]
+[ext_resource path="res://UI/StaminaUI.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
 points = PoolVector2Array( 0, 0, 2.31601, 0, 2.89743, 16, 0, 16 )
@@ -458,6 +459,7 @@ cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
 show_collision = true
 format = 1
 script = ExtResource( 1 )
+fill_percentage = 0.76
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -468,7 +470,7 @@ script = ExtResource( 2 )
 script = ExtResource( 8 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 157, 90 )
+position = Vector2( 160, 90 )
 
 [node name="HealingParticles" type="CPUParticles2D" parent="YSort/Player"]
 position = Vector2( 0, -20 )
@@ -489,10 +491,17 @@ smoothing_speed = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 5 )]
-margin_left = 5.0
-margin_top = 1.0
-margin_right = 42.0
-margin_bottom = 41.0
+[node name="HeartUI" parent="CanvasLayer" instance=ExtResource( 3 )]
+margin_left = 4.0
+margin_right = 320.0
+margin_bottom = 21.0
+
+[node name="StaminaUI" parent="CanvasLayer" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 4.0
+margin_top = 8.0
+margin_right = 68.0
+margin_bottom = 24.0
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_ExplorationLevel_child_exiting_tree"]

@@ -2,9 +2,10 @@ extends Control
 
 
 var hearts = 6 setget set_hearts
-var stamina = 5 setget set_stamina
+var stamina = 6 setget set_stamina
 var max_hearts = 6 setget set_max_hearts
 var max_stamina = 100 setget set_max_stamina
+
 
 onready var splabel = $StaminaLabel
 onready var stamina_bar = $StaminaBar
@@ -17,7 +18,7 @@ func set_hearts(value):
 	hearts = clamp(value,0,max_hearts)
 	var panels = heartContainer.get_children()
 	if(panels.size() > 0):
-		var currentHeart = ceil(hearts/4.0) - 1
+		var currentHeart = ceil(hearts/4.0)-1
 		if healing:
 			panels[currentHeart].frame -= 1
 		else:

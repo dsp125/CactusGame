@@ -226,3 +226,5 @@ func end_damage_state():
 
 func _on_HealingTimer_timeout():
 	stats.health += 1
+	#if stats.health < stats.max_health:
+	#	stats.health += 1
