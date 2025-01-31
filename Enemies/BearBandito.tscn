@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://Sprites/bear bandito-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Hurtboxes/Hurtbox.tscn" type="PackedScene" id=2]
@@ -45,6 +45,36 @@ tracks/1/keys = {
 "values": [ {
 "args": [  ],
 "method": "end_damage_state"
+} ]
+}
+
+[sub_resource type="Animation" id=78]
+resource_name = "Death"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 60, 61, 62, 63, 64, 65, 66, 67, 68, 69 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
 } ]
 }
 
@@ -351,6 +381,14 @@ states/Damaged/node = SubResource( 71 )
 states/Damaged/position = Vector2( 653, 185 )
 start_node = "Damaged"
 
+[sub_resource type="AnimationNodeAnimation" id=82]
+animation = "Death"
+
+[sub_resource type="AnimationNodeStateMachine" id=79]
+states/Death/node = SubResource( 82 )
+states/Death/position = Vector2( 616, 124 )
+start_node = "Death"
+
 [sub_resource type="AnimationNodeAnimation" id=27]
 animation = "IdleDown"
 
@@ -404,22 +442,32 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=76]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=83]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=84]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=85]
+
 [sub_resource type="AnimationNodeStateMachine" id=8]
 states/Attack/node = SubResource( 45 )
 states/Attack/position = Vector2( 491.995, 175.72 )
 states/Damaged/node = SubResource( 72 )
 states/Damaged/position = Vector2( 482.892, 275.512 )
+states/Death/node = SubResource( 79 )
+states/Death/position = Vector2( 491.995, -83.488 )
 states/Idle/node = SubResource( 28 )
 states/Idle/position = Vector2( 644, 59 )
 states/Patrol/node = SubResource( 18 )
 states/Patrol/position = Vector2( 352, 59 )
-transitions = [ "Patrol", "Idle", SubResource( 29 ), "Idle", "Patrol", SubResource( 30 ), "Patrol", "Attack", SubResource( 46 ), "Attack", "Patrol", SubResource( 47 ), "Attack", "Idle", SubResource( 48 ), "Idle", "Attack", SubResource( 49 ), "Patrol", "Damaged", SubResource( 73 ), "Attack", "Damaged", SubResource( 74 ), "Idle", "Damaged", SubResource( 75 ), "Damaged", "Patrol", SubResource( 76 ) ]
+transitions = [ "Patrol", "Idle", SubResource( 29 ), "Idle", "Patrol", SubResource( 30 ), "Patrol", "Attack", SubResource( 46 ), "Attack", "Patrol", SubResource( 47 ), "Attack", "Idle", SubResource( 48 ), "Idle", "Attack", SubResource( 49 ), "Patrol", "Damaged", SubResource( 73 ), "Attack", "Damaged", SubResource( 74 ), "Idle", "Damaged", SubResource( 75 ), "Damaged", "Patrol", SubResource( 76 ), "Patrol", "Death", SubResource( 83 ), "Attack", "Death", SubResource( 84 ), "Idle", "Death", SubResource( 85 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -226.108, 32.512 )
+graph_offset = Vector2( -187.54, -151.23 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=9]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=77]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=81]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=33]
 
@@ -435,7 +483,7 @@ position = Vector2( -1, 1 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -11 )
 hframes = 6
-vframes = 10
+vframes = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -451,6 +499,7 @@ shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Damaged = SubResource( 3 )
+anims/Death = SubResource( 78 )
 anims/IdleDown = SubResource( 10 )
 anims/RESET = SubResource( 4 )
 "anims/Throw Down" = SubResource( 5 )
@@ -468,6 +517,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 9 )
 parameters/Attack/blend_position = Vector2( 0.299525, -0.0603448 )
 parameters/Damaged/playback = SubResource( 77 )
+parameters/Death/playback = SubResource( 81 )
 parameters/Idle/playback = SubResource( 33 )
 parameters/Patrol/blend_position = Vector2( 0.277338, -0.734483 )
 

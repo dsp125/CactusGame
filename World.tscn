@@ -1,15 +1,16 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/desert_test.png" type="Texture" id=2]
 [ext_resource path="res://Objects/Rock.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/Particles/healing.png" type="Texture" id=4]
 [ext_resource path="res://Enemies/BearBandito.tscn" type="PackedScene" id=5]
-[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/StaminaUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ProcGenDesert.gd" type="Script" id=7]
 [ext_resource path="res://Sprites/Prototype_DesertTiles.png" type="Texture" id=8]
 [ext_resource path="res://Enemies/Fly.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Effects/HealZone.tscn" type="PackedScene" id=10]
+[ext_resource path="res://UI/HeartUI.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
 points = PoolVector2Array( 0, 0, 2.31601, 0, 2.89743, 16, 0, 16 )
@@ -615,11 +616,18 @@ shape = SubResource( 28 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 6 )]
-margin_left = 5.0
-margin_top = 2.0
-margin_right = 45.0
-margin_bottom = 42.0
+[node name="HeartUI" parent="CanvasLayer" instance=ExtResource( 11 )]
+margin_left = 4.0
+margin_right = 320.0
+margin_bottom = 21.0
+
+[node name="StaminaUI" parent="CanvasLayer" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 4.0
+margin_top = 8.0
+margin_right = 68.0
+margin_bottom = 24.0
 
 [connection signal="body_shape_exited" from="HealZone" to="HealZone" method="_on_HealZone_body_shape_exited"]
 

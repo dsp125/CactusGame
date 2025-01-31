@@ -30,6 +30,7 @@ onready var animationState = animationTree.get("parameters/playback")
 onready var patrol_controller = $PatrolController
 onready var origin = global_position
 onready var throwSpawn = $ThrowSpawn
+onready var hurtbox = $Hurtbox
 
 export var REF_FISH = preload("res://Hitboxes/Projectiles/Fish.tscn")
 
@@ -138,7 +139,7 @@ func return_to_origin(delta):
 	seek_player()
 
 func _on_Stats_no_health():
-	queue_free() # Replace with function body.
+	hurtbox.start_invincibility(1.2)
 
 func play_patrol_footsteps():
 	if not patrol_audio.playing:
@@ -162,8 +163,11 @@ func throw_object():
 
 func damage_state():
 	velocity = Vector2.ZERO
-
-	animationState.travel("Damaged")
+	if(stats.health > 0):
+		animationTree.set("parameters/Damaged/blend_position", inspect_target)
+		animationState.travel("Damaged")
+	else:
+		animationState.travel("Death")
 	
 func end_damage_state():
 	state = INSPECT
