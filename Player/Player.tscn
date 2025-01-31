@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=2]
+[gd_scene load_steps=94 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/lovebud-Sheet.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Audio/SFX/player_dive.mp3" type="AudioStream" id=6]
 [ext_resource path="res://Sprites/Player/reload-bar.png" type="Texture" id=7]
 [ext_resource path="res://Hitboxes/Hitbox.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Sprites/Particles/healing.png" type="Texture" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.0
@@ -1207,8 +1208,23 @@ collision_mask = 4
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 86 )
 
+[node name="HealingParticles" type="CPUParticles2D" parent="."]
+position = Vector2( 0, -20 )
+emitting = false
+amount = 3
+texture = ExtResource( 9 )
+emission_shape = 1
+emission_sphere_radius = 4.64
+flag_align_y = true
+gravity = Vector2( 0, -25 )
+scale_amount = 0.5
+color = Color( 0.4, 0.901961, 0.309804, 1 )
+
+[node name="HealingTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
+[connection signal="timeout" from="HealingTimer" to="." method="_on_HealingTimer_timeout"]
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]

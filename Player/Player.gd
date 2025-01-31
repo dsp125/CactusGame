@@ -14,6 +14,7 @@ var max_ammo = 10
 var ammo = max_ammo
 var reloading = false
 var reload_time = 1.5
+var healing = false
 
 #Scenes instantiated via player script
 export var REF_THORN = preload("res://Hitboxes/Projectiles/Thorn.tscn")
@@ -24,14 +25,15 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var thornSpawn = $ThornSpawn
 onready var reloadTimer = $ReloadTimer
+onready var healing_timer = $HealingTimer
 onready var reload_bar = $ReloadBar
 onready var hitbox = $Hitbox
+onready var healing_particles = $HealingParticles
 
 #Audio Controllers
 onready var thornAudio = $ThornShoot
 onready var footstep_audio = $Footsteps
 onready var roll_audio = $PlayerRoll
-
 
 #Player Collisions
 onready var hurtbox = $Hurtbox
@@ -221,3 +223,7 @@ func end_damage_state():
 	#hurtbox.set_invincible(false)
 	state = PlayerStates.MOVE
 	animationState.travel("Idle")
+
+func _on_HealingTimer_timeout():
+	stats.health += 1
+	

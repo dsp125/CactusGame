@@ -9,4 +9,11 @@ func _on_HealZone_area_entered(area):
 
 func _on_HealZone_body_entered(body):
 	print(body)
-	body = player
+	player = body
+	player.healing = true
+	player.healing_timer.start(0.5)
+
+func _on_HealZone_body_exited(body):
+	player.healing = false
+	player.healing_timer.stop()
+	pass # Replace with function body.
