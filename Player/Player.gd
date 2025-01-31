@@ -91,6 +91,9 @@ func move_state(delta):
 	
 	move()
 	
+	if Input.is_action_just_pressed("ui_reload"):
+		reload(reload_time)
+	
 	if Input.is_action_just_pressed("ui_roll"):
 		if(stats.stamina >= 25):
 			stats.stamina -= 25
