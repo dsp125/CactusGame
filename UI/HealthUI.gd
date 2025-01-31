@@ -17,10 +17,11 @@ func set_hearts(value):
 	hearts = clamp(value,0,max_hearts)
 	var panels = heartContainer.get_children()
 	if(panels.size() > 0):
-		var currentHeart = ceil(hearts/4.0) - 1
 		if healing:
+			var currentHeart = ceil((hearts-1)/4.0) - 1
 			panels[currentHeart].frame -= 1
 		else:
+			var currentHeart = ceil(hearts/4.0) - 1
 			panels[currentHeart].frame += 1
 
 func set_stamina(value):
