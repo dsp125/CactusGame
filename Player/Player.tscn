@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/lovebud-Sheet.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Audio/SFX/thorn_shoot.mp3" type="AudioStream" id=4]
 [ext_resource path="res://Audio/SFX/footstep_chase.mp3" type="AudioStream" id=5]
 [ext_resource path="res://Audio/SFX/player_dive.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Sprites/Player/reload-bar.png" type="Texture" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.0
@@ -993,6 +994,30 @@ graph_offset = Vector2( -330.161, -71.9632 )
 radius = 8.0
 height = 0.0
 
+[sub_resource type="AtlasTexture" id=82]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 15, 8 )
+
+[sub_resource type="AtlasTexture" id=83]
+atlas = ExtResource( 7 )
+region = Rect2( 15, 0, 15, 8 )
+
+[sub_resource type="AtlasTexture" id=84]
+atlas = ExtResource( 7 )
+region = Rect2( 30, 0, 15, 8 )
+
+[sub_resource type="AtlasTexture" id=85]
+atlas = ExtResource( 7 )
+region = Rect2( 45, 0, 15, 8 )
+
+[sub_resource type="SpriteFrames" id=81]
+animations = [ {
+"frames": [ SubResource( 82 ), SubResource( 83 ), SubResource( 84 ), SubResource( 85 ) ],
+"loop": true,
+"name": "ReloadBarAnim",
+"speed": 4.0
+} ]
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 64
 script = ExtResource( 1 )
@@ -1077,6 +1102,12 @@ stream = ExtResource( 5 )
 stream = ExtResource( 6 )
 
 [node name="ReloadTimer" type="Timer" parent="."]
+
+[node name="ReloadBar" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -20 )
+frames = SubResource( 81 )
+animation = "ReloadBarAnim"
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]

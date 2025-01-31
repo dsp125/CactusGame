@@ -13,6 +13,7 @@ var stats = PlayerStats
 var max_ammo = 10
 var ammo = max_ammo
 var reloading = false
+var reload_time = 1.5
 
 #Scenes instantiated via player script
 export var REF_THORN = preload("res://Hitboxes/Projectiles/Thorn.tscn")
@@ -23,6 +24,7 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var thornSpawn = $ThornSpawn
 onready var reloadTimer = $ReloadTimer
+onready var reload_bar = $ReloadBar
 
 #Audio Controllers
 onready var thornAudio = $ThornShoot
@@ -44,6 +46,7 @@ var state = PlayerStates.MOVE
 func _ready():
 	stats.connect("no_health", self, "queue_free")
 	animationTree.active = true
+	reload_bar.set_speed_scale(1/reload_time)
 
 func _process(delta):
 	match state:
@@ -108,7 +111,7 @@ func roll_animation_finished():
 # SHOOTING THORNS
 func shoot_thorn():
 	if ammo == 0:
-		reload(1.5)
+		reload(reload_time)
 	else:
 		ammo -= 1
 		thornAudio.play()
@@ -134,12 +137,18 @@ func shoot_state(_delta):
 		animationTree.set("parameters/Roll/blend_position", input_vector)
 		animationTree.set("parameters/Idle/blend_position", direction_vector)
 		animationTree.set("parameters/Walk/blend_position", direction_vector)
-		animationState.travel("AttackWalk")
+		if !reloading:
+			animationState.travel("AttackWalk")
+		else:
+			animationState.travel("Walk")
 		velocity = velocity.move_toward(input_vector * ATTACK_SPEED, ACCEL * FRICTION * _delta)
 		
 	else:
 		animationTree.set("parameters/AttackIdle/blend_position", direction_vector)
-		animationState.travel("AttackIdle")
+		if !reloading:
+			animationState.travel("AttackIdle")
+		else:
+			animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION*_delta)
 	
 	move()
@@ -147,7 +156,6 @@ func shoot_state(_delta):
 	if Input.is_action_just_pressed("ui_roll"):
 		animationTree.set("parameters/Roll/blend_position", input_vector)
 		state = PlayerStates.ROLL
-	
 	if Input.is_action_just_released("ui_attack"):
 		state = PlayerStates.MOVE
 	
@@ -180,11 +188,17 @@ func invulnerable():
 	hurtbox.set_invincible(true)
 
 func reload(duration):
+	reload_bar.set_frame(0)
+	reload_bar.set_visible(true)
+	reload_bar.set_playing(true)
+	
 	if not reloading:
 		reloadTimer.start(duration)
 		reloading = true
 		
 func _on_ReloadTimer_timeout():
+	reload_bar.set_visible(false)
+	reload_bar.set_playing(false)
 	reloadTimer.stop()
 	ammo = max_ammo
 	reloading = false
