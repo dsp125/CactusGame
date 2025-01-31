@@ -65,7 +65,7 @@ func _process(delta):
 			damaged_state(delta)
 	
 func move_state(delta):
-	stats.stamina += delta*2
+	stats.stamina += delta*20
 	var input_vector = Vector2.ZERO
 	direction_vector = get_global_mouse_position() - position
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -90,8 +90,8 @@ func move_state(delta):
 	move()
 	
 	if Input.is_action_just_pressed("ui_roll"):
-		if(stats.stamina >= 2):
-			stats.stamina -= 2
+		if(stats.stamina >= 25):
+			stats.stamina -= 25
 			print(stats.stamina)
 			hurtbox.set_invincible(true)
 			animationTree.set("parameters/Roll/blend_position", input_vector)

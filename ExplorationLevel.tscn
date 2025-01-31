@@ -1,6 +1,7 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://ProcGenDesert.gd" type="Script" id=1]
+[ext_resource path="res://SunspotSpawner.gd" type="Script" id=2]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Sprites/Particles/healing.png" type="Texture" id=6]
@@ -459,6 +460,9 @@ format = 1
 script = ExtResource( 1 )
 
 [node name="YSort" type="YSort" parent="."]
+
+[node name="SunspotSpawner" type="Node2D" parent="YSort"]
+script = ExtResource( 2 )
 
 [node name="EnemySpawner" type="Node2D" parent="YSort"]
 script = ExtResource( 8 )

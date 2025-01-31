@@ -9,6 +9,7 @@ export var SEED_VALUE = 69420
 #Onready
 onready var proc_gen_map_base = $ProcGenDesert
 onready var enemy_spawner = $YSort/EnemySpawner
+onready var sunspot_spawner = $YSort/SunspotSpawner
 onready var playable_space = proc_gen_map_base.playable_tiles
 
 var bears : Array = []
@@ -23,6 +24,7 @@ func _ready():
 	#print("level:  ", proc_gen_map_base.map_grid)
 	print("playable: ", playable_space)
 	var bears = enemy_spawner.spawn_bears(10,playable_space,SEED_VALUE)
+	var sunspots = sunspot_spawner.spawn_sunspots(10,playable_space,SEED_VALUE)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
