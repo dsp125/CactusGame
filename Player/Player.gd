@@ -10,6 +10,9 @@ var velocity = Vector2.ZERO
 var prev_vector = Vector2.DOWN #USED TO SAVE LAST FACING DIRECTION
 var direction_vector = Vector2.DOWN
 var stats = PlayerStats
+var max_ammo = 10
+var ammo = max_ammo
+var reloading = false
 
 #Scenes instantiated via player script
 export var REF_THORN = preload("res://Hitboxes/Projectiles/Thorn.tscn")
@@ -19,6 +22,7 @@ onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var thornSpawn = $ThornSpawn
+onready var reloadTimer = $ReloadTimer
 
 #Audio Controllers
 onready var thornAudio = $ThornShoot
@@ -51,7 +55,7 @@ func _process(delta):
 		
 		PlayerStates.SHOOT:
 			shoot_state(delta)
-		
+	
 func move_state(delta):
 	var input_vector = Vector2.ZERO
 	direction_vector = get_global_mouse_position() - position
@@ -103,12 +107,16 @@ func roll_animation_finished():
 
 # SHOOTING THORNS
 func shoot_thorn():
-	thornAudio.play()
-	if REF_THORN:
-		var thorn = REF_THORN.instance()
-		get_tree().current_scene.add_child(thorn)
-		thorn.global_position = thornSpawn.global_position
-		thorn.rotation = (get_global_mouse_position() - thorn.global_position).angle()
+	if ammo == 0:
+		reload(1.5)
+	else:
+		ammo -= 1
+		thornAudio.play()
+		if REF_THORN:
+			var thorn = REF_THORN.instance()
+			get_tree().current_scene.add_child(thorn)
+			thorn.global_position = thornSpawn.global_position
+			thorn.rotation = (get_global_mouse_position() - thorn.global_position).angle()
 		
 		#var thorn_rotation
 	
@@ -171,3 +179,12 @@ func stop_roll_audio():
 func invulnerable():
 	hurtbox.set_invincible(true)
 
+func reload(duration):
+	if not reloading:
+		reloadTimer.start(duration)
+		reloading = true
+		
+func _on_ReloadTimer_timeout():
+	reloadTimer.stop()
+	ammo = max_ammo
+	reloading = false
