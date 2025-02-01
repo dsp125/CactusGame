@@ -32,7 +32,7 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var patrol_controller = $PatrolController
 onready var origin = global_position
-onready var spitSpawn = $SpitSpawn
+onready var stinger = $Stinger
 onready var hurtbox = $Hurtbox
 
 export var REF_SPIT = preload("res://Hitboxes/Projectiles/Spit.tscn")
@@ -89,8 +89,8 @@ func _physics_process(delta):
 					velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 				else:
 					velocity = Vector2.ZERO
-					animationTree.set("parameters/Spit/blend_position", direction)
-					animationState.travel("Spit")
+					animationTree.set("parameters/Sting/blend_position", direction)
+					animationState.travel("Sting")
 			if player == null:
 				time = 0.0
 				velocity = Vector2.ZERO
@@ -148,7 +148,6 @@ func return_to_origin(delta):
 	velocity = velocity.move_toward((origin-global_position).normalized() * MAX_SPEED, ACCELERATION * delta)
 	seek_player()
 
-
 func play_patrol_footsteps():
 	if not patrol_audio.playing:
 		patrol_audio.play()
@@ -157,21 +156,19 @@ func stop_patrol_footsteps():
 	if patrol_audio.playing:
 		patrol_audio.stop()
 
-func shoot_spit():
+func shoot_stinger():
 	#throwAudio.play()
 	if REF_SPIT:
 		var spit = REF_SPIT.instance()
 		var player = player_detection_zone.player
 		get_tree().current_scene.add_child(spit)
-		spit.global_position = spitSpawn.global_position
+		spit.global_position = stinger.global_position
 		spit.rotation = spit.global_position.direction_to(player.global_position).angle()
 
 func damage_state():
 	if(stats.health > 0):
 		animationTree.set("parameters/Damaged/blend_position", inspect_target)
 		animationState.travel("Damaged")
-	else:
-		animationState.travel("Death")
 
 func end_damage_state():
 	state = IDLE

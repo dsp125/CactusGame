@@ -140,6 +140,7 @@ func return_to_origin(delta):
 
 func _on_Stats_no_health():
 	hurtbox.start_invincibility(1.2)
+	animationState.travel("Death")
 
 func play_patrol_footsteps():
 	if not patrol_audio.playing:

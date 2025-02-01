@@ -1,0 +1,645 @@
+[gd_scene load_steps=55 format=2]
+
+[ext_resource path="res://Stats.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Hurtboxes/Hurtbox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Enemies/PatrolController.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemies/FootstepPatrol.gd" type="Script" id=5]
+[ext_resource path="res://Sprites/Enemies/bee.png" type="Texture" id=6]
+[ext_resource path="res://Audio/SFX/footstep_chase.mp3" type="AudioStream" id=7]
+[ext_resource path="res://Enemies/Bee.gd" type="Script" id=8]
+
+[sub_resource type="CapsuleShape2D" id=119]
+radius = 5.0
+height = 0.0
+
+[sub_resource type="CapsuleShape2D" id=120]
+radius = 8.0
+height = 0.0
+
+[sub_resource type="CircleShape2D" id=121]
+radius = 101.242
+
+[sub_resource type="Animation" id=122]
+resource_name = "Attack Down"
+length = 0.6
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_stinger"
+}, {
+"args": [  ],
+"method": "end_damage_state"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 18, 19, 20, 21, 22, 23 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Stinger:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -5 ) ]
+}
+
+[sub_resource type="Animation" id=123]
+resource_name = "Attack Left"
+length = 0.6
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_stinger"
+}, {
+"args": [  ],
+"method": "end_damage_state"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14, 15, 16, 17 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Stinger:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -4, -7 ) ]
+}
+
+[sub_resource type="Animation" id=124]
+resource_name = "Attack Right"
+length = 0.6
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_stinger"
+}, {
+"args": [  ],
+"method": "end_damage_state"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8, 9, 10, 11 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Stinger:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 6, -6 ) ]
+}
+
+[sub_resource type="Animation" id=125]
+resource_name = "Attack Up"
+length = 0.6
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "end_damage_state"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 26, 27, 28, 29 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Stinger:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -15 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_stinger"
+} ]
+}
+
+[sub_resource type="Animation" id=133]
+resource_name = "Damage Down"
+length = 1.1
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_spit"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 42, 43, 44, 45, 46, 47 ]
+}
+
+[sub_resource type="Animation" id=134]
+resource_name = "Damage Left"
+length = 1.1
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_spit"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 36, 37, 38, 39, 40, 41 ]
+}
+
+[sub_resource type="Animation" id=135]
+resource_name = "Damage Right"
+length = 1.1
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_spit"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 30, 31, 32, 33, 34, 35 ]
+}
+
+[sub_resource type="Animation" id=136]
+resource_name = "Damage Up"
+length = 1.1
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_spit"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 48, 49, 50, 51, 52, 53 ]
+}
+
+[sub_resource type="Animation" id=126]
+resource_name = "Death"
+length = 1.2
+step = 0.2
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=127]
+resource_name = "Fly Down"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 66, 67, 68, 69, 70, 71 ]
+}
+
+[sub_resource type="Animation" id=128]
+resource_name = "Fly Left"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 60, 61, 62, 63, 64, 65 ]
+}
+
+[sub_resource type="Animation" id=129]
+resource_name = "Fly Right"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 54, 55, 56, 57, 58, 59 ]
+}
+
+[sub_resource type="Animation" id=130]
+resource_name = "Fly Up"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 72, 73, 74, 75, 76, 77 ]
+}
+
+[sub_resource type="Animation" id=131]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=132]
+resource_name = "Spawn"
+length = 1.2
+
+[sub_resource type="AnimationNodeAnimation" id=137]
+animation = "Damage Left"
+
+[sub_resource type="AnimationNodeAnimation" id=138]
+animation = "Damage Down"
+
+[sub_resource type="AnimationNodeAnimation" id=139]
+animation = "Damage Up"
+
+[sub_resource type="AnimationNodeAnimation" id=140]
+animation = "Damage Right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=90]
+blend_point_0/node = SubResource( 137 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 138 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 139 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 140 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=113]
+animation = "Death"
+
+[sub_resource type="AnimationNodeStateMachine" id=114]
+states/Death/node = SubResource( 113 )
+states/Death/position = Vector2( 747, 201 )
+start_node = "Death"
+
+[sub_resource type="AnimationNodeAnimation" id=141]
+animation = "Fly Left"
+
+[sub_resource type="AnimationNodeAnimation" id=142]
+animation = "Fly Down"
+
+[sub_resource type="AnimationNodeAnimation" id=143]
+animation = "Fly Up"
+
+[sub_resource type="AnimationNodeAnimation" id=144]
+animation = "Fly Right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=95]
+blend_point_0/node = SubResource( 141 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 142 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 143 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 144 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=145]
+animation = "Attack Left"
+
+[sub_resource type="AnimationNodeAnimation" id=146]
+animation = "Attack Up"
+
+[sub_resource type="AnimationNodeAnimation" id=147]
+animation = "Attack Right"
+
+[sub_resource type="AnimationNodeAnimation" id=148]
+animation = "Attack Down"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=96]
+blend_point_0/node = SubResource( 145 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 146 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 147 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 148 )
+blend_point_3/pos = Vector2( 0, 1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=97]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=98]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=99]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=100]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=101]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=102]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=117]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=118]
+
+[sub_resource type="AnimationNodeStateMachine" id=149]
+states/Damaged/node = SubResource( 90 )
+states/Damaged/position = Vector2( 569, 186 )
+states/Death/node = SubResource( 114 )
+states/Death/position = Vector2( 564, -46 )
+states/Fly/node = SubResource( 95 )
+states/Fly/position = Vector2( 471, 90 )
+states/Sting/node = SubResource( 96 )
+states/Sting/position = Vector2( 667, 90 )
+transitions = [ "Fly", "Sting", SubResource( 97 ), "Sting", "Fly", SubResource( 98 ), "Fly", "Damaged", SubResource( 99 ), "Damaged", "Fly", SubResource( 100 ), "Damaged", "Sting", SubResource( 101 ), "Sting", "Damaged", SubResource( 102 ), "Fly", "Death", SubResource( 117 ), "Sting", "Death", SubResource( 118 ) ]
+start_node = "Fly"
+graph_offset = Vector2( 0, -27.5996 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=150]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=151]
+
+[node name="Bee" type="KinematicBody2D"]
+collision_layer = 32
+script = ExtResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 2 )
+texture = ExtResource( 6 )
+offset = Vector2( 0, -11 )
+hframes = 6
+vframes = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 119 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 2 )]
+collision_layer = 4
+collision_mask = 9
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 0, -9 )
+shape = SubResource( 120 )
+
+[node name="Stats" parent="." instance=ExtResource( 1 )]
+max_health = 3
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 4 )]
+collision_mask = 64
+monitorable = false
+radius = 300
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+position = Vector2( 2, -14 )
+shape = SubResource( 121 )
+
+[node name="PatrolController" parent="." instance=ExtResource( 3 )]
+
+[node name="FootstepPatrol" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+pitch_scale = 0.83
+script = ExtResource( 5 )
+
+[node name="Stinger" type="Position2D" parent="."]
+position = Vector2( 0, -5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/Attack Down" = SubResource( 122 )
+"anims/Attack Left" = SubResource( 123 )
+"anims/Attack Right" = SubResource( 124 )
+"anims/Attack Up" = SubResource( 125 )
+"anims/Damage Down" = SubResource( 133 )
+"anims/Damage Left" = SubResource( 134 )
+"anims/Damage Right" = SubResource( 135 )
+"anims/Damage Up" = SubResource( 136 )
+anims/Death = SubResource( 126 )
+"anims/Fly Down" = SubResource( 127 )
+"anims/Fly Left" = SubResource( 128 )
+"anims/Fly Right" = SubResource( 129 )
+"anims/Fly Up" = SubResource( 130 )
+anims/RESET = SubResource( 131 )
+anims/Spawn = SubResource( 132 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 149 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 150 )
+parameters/Damaged/blend_position = Vector2( 0, 0 )
+parameters/Death/playback = SubResource( 151 )
+parameters/Fly/blend_position = Vector2( 0.010293, 0.491379 )
+parameters/Sting/blend_position = Vector2( 0, 0 )
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+
+[editable path="Hurtbox"]
+[editable path="PlayerDetectionZone"]
