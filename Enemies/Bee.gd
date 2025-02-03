@@ -77,7 +77,7 @@ func _physics_process(delta):
 			time += delta
 			var player = player_detection_zone.player
 			if player != null:
-				var direction = global_position.direction_to(player.global_position)
+				var direction = global_position.direction_to(Vector2(player.global_position.x, player.global_position.y-11))
 				#OSCILATING PATH LOGIC
 				#direction.y = cos(time*path_frequency)*path_amplitude
 				#direction = direction.normalized()
@@ -163,7 +163,8 @@ func shoot_stinger():
 		var player = player_detection_zone.player
 		get_tree().current_scene.add_child(spit)
 		spit.global_position = stinger.global_position
-		spit.rotation = spit.global_position.direction_to(player.global_position).angle()
+		var approx_player = Vector2(player.global_position.x + rand_range(-10,10), player.global_position.y-11 + rand_range(-10,10))
+		spit.rotation = spit.global_position.direction_to(approx_player).angle()
 
 func damage_state():
 	if(stats.health > 0):

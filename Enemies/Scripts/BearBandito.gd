@@ -160,7 +160,8 @@ func throw_object():
 		var player = player_detection_zone.player
 		get_tree().current_scene.add_child(fish)
 		fish.global_position = throwSpawn.global_position
-		fish.rotation = fish.global_position.direction_to(Vector2(player.global_position.x,player.global_position.y-11)).angle()
+		var approx_player = Vector2(player.global_position.x + rand_range(-10,10), player.global_position.y-11 + rand_range(-10,10))
+		fish.rotation = fish.global_position.direction_to(approx_player).angle()
 
 func damage_state():
 	velocity = Vector2.ZERO
